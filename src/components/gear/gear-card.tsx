@@ -40,4 +40,3 @@ export function GearCard({ gear }: { gear: GearItem }) {
     </article>
   );
 }
-
