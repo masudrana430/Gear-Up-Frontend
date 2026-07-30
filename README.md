@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GearUp Frontend
 
-## Getting Started
+GearUp is a responsive sports and outdoor equipment rental frontend built with
+Next.js 16, TypeScript, Tailwind CSS, TanStack Query, Zustand, React Hook Form,
+and Zod.
 
-First, run the development server:
+## Live services
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Backend API: https://gear-up-backend-delta.vercel.app
+- Swagger: https://gear-up-backend-delta.vercel.app/api-docs
+- OpenAPI: https://gear-up-backend-delta.vercel.app/api-docs.json
+
+## Features
+
+- Public gear catalogue with search and filters
+- JWT login and customer/provider registration
+- Optimistic role protection through Next.js Proxy
+- Customer rental, cancellation, payment, history, and review flows
+- Provider inventory CRUD and order fulfillment workflow
+- Admin user, category, gear, rental, and payment management
+- Real SSLCommerz gateway initiation
+- Responsive UI, dark mode, loading skeletons, empty states, and error feedback
+- Zod and React Hook Form validation
+- Automated ESLint, TypeScript, and production-build CI
+
+## Admin test account
+
+These credentials were verified against the deployed backend:
+
+```text
+Email: admin@gearup.com
+Password: GearUpAdmin@2026
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cp .env.example .env.local
+npm ci
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000.
 
-## Learn More
+## Quality checks
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run lint
+npm run type-check
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_API_BASE_URL=https://gear-up-backend-delta.vercel.app/api/v1
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
-## Deploy on Vercel
+Set `NEXT_PUBLIC_APP_URL` to the production Vercel URL when deploying.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API mapping
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [API_INTEGRATION.md](./API_INTEGRATION.md) for the complete mapping between
+frontend components and backend endpoints, payment behavior, and the documented
+Admin review-listing API gap.
