@@ -11,14 +11,19 @@ import type {
 export const providerService = {
   gear: () => apiRequest<GearItem[]>(endpoints.provider.gear),
   createGear: (input: GearInput) =>
-    apiRequest<GearItem>(endpoints.provider.gear, { method: "POST", body: input }),
+    apiRequest<GearItem>(endpoints.provider.gear, {
+      method: "POST",
+      body: input,
+    }),
   updateGear: (id: string, input: Partial<GearInput>) =>
     apiRequest<GearItem>(`${endpoints.provider.gear}/${id}`, {
       method: "PATCH",
       body: input,
     }),
   removeGear: (id: string) =>
-    apiRequest<GearItem>(`${endpoints.provider.gear}/${id}`, { method: "DELETE" }),
+    apiRequest<GearItem>(`${endpoints.provider.gear}/${id}`, {
+      method: "DELETE",
+    }),
   orders: (page = 1, limit = 10, status?: RentalStatus) =>
     apiRequest<PaginatedData<RentalOrder>>(
       `${endpoints.provider.orders}${queryString({ page, limit, status })}`,

@@ -49,7 +49,9 @@ export function LoginForm() {
           {...form.register("email")}
         />
         {form.formState.errors.email && (
-          <p className="text-sm text-destructive">{form.formState.errors.email.message}</p>
+          <p className="text-sm text-destructive">
+            {form.formState.errors.email.message}
+          </p>
         )}
       </div>
       <div className="space-y-2">
@@ -63,15 +65,24 @@ export function LoginForm() {
           {...form.register("password")}
         />
         {form.formState.errors.password && (
-          <p className="text-sm text-destructive">{form.formState.errors.password.message}</p>
+          <p className="text-sm text-destructive">
+            {form.formState.errors.password.message}
+          </p>
         )}
       </div>
-      <Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+      <Button
+        className="w-full"
+        type="submit"
+        disabled={form.formState.isSubmitting}
+      >
         {form.formState.isSubmitting ? "Signing in…" : "Sign in"}
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         New to GearUp?{" "}
-        <Link href="/auth/register" className="font-medium text-primary underline-offset-4 hover:underline">
+        <Link
+          href="/auth/register"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
           Create an account
         </Link>
       </p>

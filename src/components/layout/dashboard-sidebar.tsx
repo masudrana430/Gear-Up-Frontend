@@ -42,8 +42,19 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
     <aside className="border-b bg-card lg:min-h-[calc(100vh-4rem)] lg:w-64 lg:border-b-0 lg:border-r">
       <nav className="flex gap-1 overflow-x-auto p-3 lg:flex-col lg:p-5">
         {links[role].map(([Icon, label, href]) => {
-          const active = pathname === href || (href.split("/").length > 3 && pathname.startsWith(`${href}/`));
-          return <Link key={href} href={href} className={`flex shrink-0 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium ${active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}><Icon className="size-4" />{label}</Link>;
+          const active =
+            pathname === href ||
+            (href.split("/").length > 3 && pathname.startsWith(`${href}/`));
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={`flex shrink-0 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium ${active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+            >
+              <Icon className="size-4" />
+              {label}
+            </Link>
+          );
         })}
       </nav>
     </aside>

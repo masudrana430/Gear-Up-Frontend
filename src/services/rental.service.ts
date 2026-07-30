@@ -1,6 +1,11 @@
 import { apiRequest, queryString } from "@/lib/api/client";
 import { endpoints } from "@/lib/api/endpoints";
-import type { CreateRentalInput, PaginatedData, RentalOrder, RentalQuery } from "@/types";
+import type {
+  CreateRentalInput,
+  PaginatedData,
+  RentalOrder,
+  RentalQuery,
+} from "@/types";
 
 export const rentalService = {
   create: (input: CreateRentalInput) =>

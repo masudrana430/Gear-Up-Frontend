@@ -12,7 +12,10 @@ export function proxy(request: NextRequest) {
   }
 
   const roleSegment = pathname.split("/")[2]?.toUpperCase();
-  if (["CUSTOMER", "PROVIDER", "ADMIN"].includes(roleSegment) && role !== roleSegment) {
+  if (
+    ["CUSTOMER", "PROVIDER", "ADMIN"].includes(roleSegment) &&
+    role !== roleSegment
+  ) {
     return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 

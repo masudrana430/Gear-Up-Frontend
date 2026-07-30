@@ -48,9 +48,15 @@ export function AdminReviewTable() {
   });
 
   if (query.isLoading) return <LoadingSpinner label="Loading reviews…" />;
-  if (query.isError) return <ErrorMessage message={getErrorMessage(query.error)} />;
+  if (query.isError)
+    return <ErrorMessage message={getErrorMessage(query.error)} />;
   if (!query.data?.length) {
-    return <EmptyState title="No reviews found" description="Customer reviews will appear here after returned rentals are reviewed." />;
+    return (
+      <EmptyState
+        title="No reviews found"
+        description="Customer reviews will appear here after returned rentals are reviewed."
+      />
+    );
   }
 
   return (
@@ -69,14 +75,27 @@ export function AdminReviewTable() {
         <tbody>
           {query.data.map((review) => (
             <tr key={review.id} className="border-t">
-              <td className="p-4 font-medium">{review.customer?.name ?? "Customer"}</td>
-              <td className="p-4">{review.gearName}</td>
-              <td className="p-4" aria-label={`${review.rating} out of 5 stars`}>
-                <span className="text-amber-500">{"★".repeat(review.rating)}</span>
-                <span className="text-muted-foreground">{"★".repeat(5 - review.rating)}</span>
+              <td className="p-4 font-medium">
+                {review.customer?.name ?? "Customer"}
               </td>
-              <td className="max-w-sm p-4 text-muted-foreground">{review.comment || "No comment"}</td>
-              <td className="whitespace-nowrap p-4">{formatDate(review.createdAt)}</td>
+              <td className="p-4">{review.gearName}</td>
+              <td
+                className="p-4"
+                aria-label={`${review.rating} out of 5 stars`}
+              >
+                <span className="text-amber-500">
+                  {"★".repeat(review.rating)}
+                </span>
+                <span className="text-muted-foreground">
+                  {"★".repeat(5 - review.rating)}
+                </span>
+              </td>
+              <td className="max-w-sm p-4 text-muted-foreground">
+                {review.comment || "No comment"}
+              </td>
+              <td className="whitespace-nowrap p-4">
+                {formatDate(review.createdAt)}
+              </td>
               <td className="p-4 text-right">
                 <Button
                   type="button"

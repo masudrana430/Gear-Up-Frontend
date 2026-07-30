@@ -47,13 +47,32 @@ export function RegisterForm() {
     <form onSubmit={submit} className="space-y-5" noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" error={form.formState.errors.name?.message}>
-          <Input placeholder="Your name" autoComplete="name" {...form.register("name")} />
+          <Input
+            placeholder="Your name"
+            autoComplete="name"
+            {...form.register("name")}
+          />
         </Field>
-        <Field label="Email address" error={form.formState.errors.email?.message}>
-          <Input type="email" placeholder="you@example.com" autoComplete="email" {...form.register("email")} />
+        <Field
+          label="Email address"
+          error={form.formState.errors.email?.message}
+        >
+          <Input
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            {...form.register("email")}
+          />
         </Field>
-        <Field label="Phone (optional)" error={form.formState.errors.phone?.message}>
-          <Input placeholder="01XXXXXXXXX" autoComplete="tel" {...form.register("phone")} />
+        <Field
+          label="Phone (optional)"
+          error={form.formState.errors.phone?.message}
+        >
+          <Input
+            placeholder="01XXXXXXXXX"
+            autoComplete="tel"
+            {...form.register("phone")}
+          />
         </Field>
         <Field label="Account type" error={form.formState.errors.role?.message}>
           <select
@@ -65,18 +84,37 @@ export function RegisterForm() {
           </select>
         </Field>
       </div>
-      <Field label="Address (optional)" error={form.formState.errors.address?.message}>
-        <Input placeholder="Chattogram, Bangladesh" autoComplete="street-address" {...form.register("address")} />
+      <Field
+        label="Address (optional)"
+        error={form.formState.errors.address?.message}
+      >
+        <Input
+          placeholder="Chattogram, Bangladesh"
+          autoComplete="street-address"
+          {...form.register("address")}
+        />
       </Field>
       <Field label="Password" error={form.formState.errors.password?.message}>
-        <Input type="password" autoComplete="new-password" placeholder="8+ characters with upper, lower and number" {...form.register("password")} />
+        <Input
+          type="password"
+          autoComplete="new-password"
+          placeholder="8+ characters with upper, lower and number"
+          {...form.register("password")}
+        />
       </Field>
-      <Button className="w-full" type="submit" disabled={form.formState.isSubmitting}>
+      <Button
+        className="w-full"
+        type="submit"
+        disabled={form.formState.isSubmitting}
+      >
         {form.formState.isSubmitting ? "Creating account…" : "Create account"}
       </Button>
       <p className="text-center text-sm text-muted-foreground">
         Already registered?{" "}
-        <Link href="/auth/login" className="font-medium text-primary underline-offset-4 hover:underline">
+        <Link
+          href="/auth/login"
+          className="font-medium text-primary underline-offset-4 hover:underline"
+        >
           Sign in
         </Link>
       </p>

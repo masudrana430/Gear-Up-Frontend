@@ -10,8 +10,12 @@ export function Footer() {
         </div>
         <p>Sports and outdoor equipment, ready when adventure calls.</p>
         <div className="flex gap-4">
-          <Link href="/gear" className="hover:text-foreground">Browse</Link>
-          <Link href="/auth/register" className="hover:text-foreground">Become a provider</Link>
+          <Link href="/gear" className="hover:text-foreground">
+            Browse
+          </Link>
+          <Link href="/auth/register" className="hover:text-foreground">
+            Become a provider
+          </Link>
         </div>
       </div>
     </footer>
