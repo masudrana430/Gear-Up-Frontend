@@ -1,10 +1,3 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / provider / gear / new
-      </p>
-    </main>
-  );
-}
+import { GearForm } from "@/components/gear/gear-form";
+import { PageHeader } from "@/components/shared/page-header";
+export default function NewGearPage() { return <div className="space-y-7"><PageHeader title="Add gear" description="Create a new rentable inventory listing." /><GearForm /></div>; }

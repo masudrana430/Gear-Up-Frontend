@@ -1,10 +1,3 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / provider / orders / [id]
-      </p>
-    </main>
-  );
-}
+import { ProviderOrderDetails } from "@/components/provider/provider-order-details";
+import { PageHeader } from "@/components/shared/page-header";
+export default async function ProviderOrderPage({ params }: { params: Promise<{ id: string }> }) { const { id } = await params; return <div className="space-y-7"><PageHeader title="Order details" description="Customer, dates, items, and payment information." /><ProviderOrderDetails id={id} /></div>; }

@@ -77,8 +77,7 @@ export default function Home() {
           <Link href="/gear" className="hidden items-center gap-1 text-sm font-medium sm:flex">
             View all <ArrowRight className="size-4" />
           </Link>
-        </div>
-        <GearGrid filters={{ page: 1, limit: 3 }} />
+        </div>        <GearGrid filters={{ page: 1, limit: 3 }} />
       </section>
 
       <section className="border-y bg-muted/30">

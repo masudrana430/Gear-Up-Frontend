@@ -1,10 +1,3 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / admin / reviews
-      </p>
-    </main>
-  );
-}
+import { AdminReviewTable } from "@/components/admin/review-table";
+import { PageHeader } from "@/components/shared/page-header";
+export default function AdminReviewsPage() { return <div className="space-y-7"><PageHeader title="Review moderation" description="Review and remove customer feedback across all gear listings." /><AdminReviewTable /></div>; }

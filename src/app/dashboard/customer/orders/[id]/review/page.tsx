@@ -1,10 +1,7 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / customer / orders / [id] / review
-      </p>
-    </main>
-  );
+import { RentalDetails } from "@/components/customer/rental-details";
+import { PageHeader } from "@/components/shared/page-header";
+
+export default async function ReviewRentalPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <div className="space-y-7"><PageHeader title="Review your rental" description="Share an honest rating after returning the equipment." /><RentalDetails id={id} mode="review" /></div>;
 }

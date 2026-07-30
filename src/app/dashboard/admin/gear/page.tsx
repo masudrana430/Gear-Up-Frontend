@@ -1,10 +1,3 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / admin / gear
-      </p>
-    </main>
-  );
-}
+import { GearModerationTable } from "@/components/admin/gear-moderation-table";
+import { PageHeader } from "@/components/shared/page-header";
+export default function AdminGearPage() { return <div className="space-y-7"><PageHeader title="Gear moderation" description="Enable or disable listings across all providers." /><GearModerationTable /></div>; }

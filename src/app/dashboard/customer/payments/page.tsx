@@ -1,10 +1,6 @@
-export default function Page() {
-  return (
-    <main className="container mx-auto px-4 py-10">
-      <h1 className="text-2xl font-semibold">GearUp</h1>
-      <p className="mt-2 text-muted-foreground">
-        Page scaffold: dashboard / customer / payments
-      </p>
-    </main>
-  );
+import { PaymentTable } from "@/components/customer/payment-table";
+import { PageHeader } from "@/components/shared/page-header";
+
+export default function CustomerPaymentsPage() {
+  return <div className="space-y-7"><PageHeader title="Payment history" description="Review SSLCommerz transactions and their current status." /><PaymentTable /></div>;
 }
