@@ -4,15 +4,45 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const categories = [
-  { name: "Camping", image: "/images/categories/camping.jpg" },
-  { name: "Cycling", image: "/images/categories/cycling.jpg" },
-  { name: "Hiking", image: "/images/categories/hiking.jpg" },
-  { name: "Photography", image: "/images/categories/photography.jpg" },
-  { name: "Water sports", image: "/images/categories/water-sports.jpg" },
-  { name: "Fitness", image: "/images/categories/fitness.jpg" },
+  {
+    name: "Camping",
+    slug: "camping",
+    image: "/images/categories/camping.jpg",
+  },
+  {
+    name: "Cycling",
+    slug: "cycling",
+    image: "/images/categories/cycling.jpg",
+  },
+  {
+    name: "Hiking",
+    slug: "hiking",
+    image: "/images/categories/hiking.jpg",
+  },
+  {
+    name: "Team Sports",
+    slug: "team-sports",
+    image: "/images/categories/team-sports.jpg",
+  },
+  {
+    name: "Water Sports",
+    slug: "water-sports",
+    image: "/images/categories/water-sports.jpg",
+  },
+  {
+    name: "Fitness",
+    slug: "fitness",
+    image: "/images/categories/fitness.jpg",
+  },
 ];
 
-export function CategoryRail() {
+type CategoryRailProps = {
+  showHeading?: boolean;
+};
+
+export function CategoryRail({
+  showHeading = false,
+}: CategoryRailProps) {
   const railRef = useRef<HTMLDivElement>(null);
   const isHoveringRef = useRef(false);
   const isDraggingRef = useRef(false);
@@ -41,7 +71,6 @@ export function CategoryRail() {
     let animationFrame = 0;
     let previousTime = performance.now();
 
-    // Start from the middle, so dragging works in both directions.
     rail.scrollLeft = rail.scrollWidth / 4;
 
     const moveCategories = (currentTime: number) => {
@@ -49,6 +78,7 @@ export function CategoryRail() {
       previousTime = currentTime;
 
       if (!isHoveringRef.current && !isDraggingRef.current) {
+        // Visual movement: left to right
         rail.scrollLeft -= delta * 0.06;
         keepScrollLooping(rail);
       }
@@ -72,10 +102,16 @@ export function CategoryRail() {
 
   return (
     <section
-      aria-label="Browse gear categories"
-      className="border-b border-slate-200 bg-white py-3 dark:border-white/10 dark:bg-background"
+      aria-label="Shop gear by activity"
+      className="border-b border-slate-200 bg-white dark:border-white/10 dark:bg-background"
     >
-      <div className="mx-auto max-w-[1440px]">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+        {showHeading && (
+          <h2 className="mb-4 text-2xl font-bold tracking-tight text-slate-800 dark:text-white">
+            Shop by activity
+          </h2>
+        )}
+
         <div
           ref={railRef}
           className={`overflow-x-scroll select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
@@ -131,8 +167,10 @@ export function CategoryRail() {
 
               return (
                 <Link
-                  key={`${category.name}-${index}`}
-                  href="/gear"
+                  key={`${category.slug}-${index}`}
+                  href={`/gear?category=${encodeURIComponent(
+                    category.slug,
+                  )}&page=1&limit=12&sortBy=createdAt&sortOrder=desc`}
                   tabIndex={isDuplicate ? -1 : undefined}
                   aria-hidden={isDuplicate}
                   onClick={(event) => {
@@ -140,7 +178,7 @@ export function CategoryRail() {
                       event.preventDefault();
                     }
                   }}
-                  className="group relative mr-3 h-[78px] w-[132px] shrink-0 overflow-hidden rounded-md border border-slate-200 bg-slate-200 shadow-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:border-teal-400 hover:shadow-lg dark:border-white/10 dark:bg-slate-800 sm:h-[80px] sm:w-[140px]"
+                  className="group relative mr-3 h-[82px] w-[140px] shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-200 shadow-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:border-cyan-400 hover:shadow-lg dark:border-white/10 dark:bg-slate-800 sm:h-[88px] sm:w-[150px]"
                 >
                   <div
                     className="absolute inset-0 bg-cover bg-center transition duration-500 group-hover:scale-110"
@@ -149,9 +187,9 @@ export function CategoryRail() {
                     }}
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
 
-                  <span className="absolute inset-x-2 bottom-2 text-xs font-bold text-white drop-shadow">
+                  <span className="absolute inset-x-3 bottom-2 text-sm font-bold text-white drop-shadow">
                     {category.name}
                   </span>
                 </Link>

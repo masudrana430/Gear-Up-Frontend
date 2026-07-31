@@ -8,6 +8,7 @@ import { GearFilters } from "@/components/gear/gear-filters";
 import { GearGrid } from "@/components/gear/gear-grid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CategoryRail } from "@/components/home/category-rail";
 
 type FilterTag = {
   id: string;
@@ -173,117 +174,121 @@ function GearPageContent() {
   }`;
 
   return (
-    <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6">
-      <div className="mb-8">
-        <p className="text-sm font-semibold text-primary">
-          EQUIPMENT FOR EVERY ADVENTURE
-        </p>
+    <>
+      <CategoryRail showHeading />
 
-        <h1 className="mt-2 text-4xl font-bold tracking-tight">
-          Browse rental gear
-        </h1>
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6">
+        <div className="mb-8">
+          <p className="text-sm font-semibold text-primary">
+            EQUIPMENT FOR EVERY ADVENTURE
+          </p>
 
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          Search trusted local inventory and reserve exactly what you need.
-        </p>
-      </div>
+          <h1 className="mt-2 text-4xl font-bold tracking-tight">
+            Browse rental gear
+          </h1>
 
-      {/* Main search box */}
-      <form
-        onSubmit={handleSearch}
-        className="relative mb-5 flex items-center gap-3"
-      >
-        <Search className="pointer-events-none absolute left-4 size-5 text-muted-foreground" />
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Search trusted local inventory and reserve exactly what you need.
+          </p>
+        </div>
 
-        <Input
-          key={urlQuery}
-          name="search"
-          defaultValue={filters.search ?? ""}
-          className="h-12 pl-11 pr-4"
-          placeholder="Search rental gear, brands, or equipment..."
-        />
+        {/* Main search box */}
+        <form
+          onSubmit={handleSearch}
+          className="relative mb-5 flex items-center gap-3"
+        >
+          <Search className="pointer-events-none absolute left-4 size-5 text-muted-foreground" />
 
-        <Button type="submit" className="h-12 px-5">
-          Search
-        </Button>
-      </form>
+          <Input
+            key={urlQuery}
+            name="search"
+            defaultValue={filters.search ?? ""}
+            className="h-12 pl-11 pr-4"
+            placeholder="Search rental gear, brands, or equipment..."
+          />
 
-      {/* Active tags and sorting */}
-      <div className="mb-7 flex flex-col gap-4 border-y py-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap items-center gap-2">
-          {activeTags.length > 0 ? (
-            <>
-              {activeTags.map((tag) => (
+          <Button type="submit" className="h-12 px-5">
+            Search
+          </Button>
+        </form>
+
+        {/* Active tags and sorting */}
+        <div className="mb-7 flex flex-col gap-4 border-y py-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-wrap items-center gap-2">
+            {activeTags.length > 0 ? (
+              <>
+                {activeTags.map((tag) => (
+                  <button
+                    key={tag.id}
+                    type="button"
+                    onClick={() =>
+                      writeFilters({
+                        ...filters,
+                        ...tag.clear,
+                        page: 1,
+                      })
+                    }
+                    className="inline-flex items-center gap-1 rounded-full border bg-muted px-3 py-1.5 text-sm font-medium transition hover:bg-destructive/10 hover:text-destructive"
+                  >
+                    {tag.label}
+                    <X className="size-3.5" />
+                  </button>
+                ))}
+
                 <button
-                  key={tag.id}
                   type="button"
                   onClick={() =>
                     writeFilters({
-                      ...filters,
-                      ...tag.clear,
                       page: 1,
+                      limit: filters.limit ?? 12,
+                      sortBy: "createdAt",
+                      sortOrder: "desc",
                     })
                   }
-                  className="inline-flex items-center gap-1 rounded-full border bg-muted px-3 py-1.5 text-sm font-medium transition hover:bg-destructive/10 hover:text-destructive"
+                  className="px-2 text-sm font-medium text-muted-foreground hover:text-foreground"
                 >
-                  {tag.label}
-                  <X className="size-3.5" />
+                  Clear all
                 </button>
-              ))}
+              </>
+            ) : (
+              <span className="text-sm text-muted-foreground">
+                No filters selected
+              </span>
+            )}
+          </div>
 
-              <button
-                type="button"
-                onClick={() =>
-                  writeFilters({
-                    page: 1,
-                    limit: filters.limit ?? 12,
-                    sortBy: "createdAt",
-                    sortOrder: "desc",
-                  })
-                }
-                className="px-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-              >
-                Clear all
-              </button>
-            </>
-          ) : (
-            <span className="text-sm text-muted-foreground">
-              No filters selected
-            </span>
-          )}
+          <label className="flex items-center gap-2 text-sm font-medium">
+            <SlidersHorizontal className="size-4" />
+            Sort by:
+            <select
+              value={sortValue}
+              onChange={(event) => {
+                const [sortBy, sortOrder] = event.target.value.split(":");
+
+                writeFilters({
+                  ...filters,
+                  sortBy: sortBy as GearQuery["sortBy"],
+                  sortOrder: sortOrder as GearQuery["sortOrder"],
+                  page: 1,
+                });
+              }}
+              className="h-9 rounded-md border bg-background px-3 text-sm outline-none"
+            >
+              <option value="createdAt:desc">Newest first</option>
+              <option value="createdAt:asc">Oldest first</option>
+              <option value="pricePerDay:asc">Price: low to high</option>
+              <option value="pricePerDay:desc">Price: high to low</option>
+              <option value="name:asc">Name: A–Z</option>
+              <option value="name:desc">Name: Z–A</option>
+            </select>
+          </label>
         </div>
 
-        <label className="flex items-center gap-2 text-sm font-medium">
-          <SlidersHorizontal className="size-4" />
-          Sort by:
-          <select
-            value={sortValue}
-            onChange={(event) => {
-              const [sortBy, sortOrder] = event.target.value.split(":");
-
-              writeFilters({
-                ...filters,
-                sortBy: sortBy as GearQuery["sortBy"],
-                sortOrder: sortOrder as GearQuery["sortOrder"],
-                page: 1,
-              });
-            }}
-            className="h-9 rounded-md border bg-background px-3 text-sm outline-none"
-          >
-            <option value="createdAt:desc">Newest first</option>
-            <option value="createdAt:asc">Oldest first</option>
-            <option value="pricePerDay:asc">Price: low to high</option>
-            <option value="pricePerDay:desc">Price: high to low</option>
-            <option value="name:asc">Name: A–Z</option>
-            <option value="name:desc">Name: Z–A</option>
-          </select>
-        </label>
-      </div>
-
-      <div className="grid gap-7 lg:grid-cols-[260px_1fr]">
-        <GearFilters value={filters} onChange={writeFilters} />
-        <GearGrid filters={filters} />
-      </div>
-    </main>
+        <div className="grid gap-7 lg:grid-cols-[260px_1fr]">
+          <GearFilters value={filters} onChange={writeFilters} />
+          <GearGrid filters={filters} />
+        </div>
+      </main>
+    </>
   );
 }
