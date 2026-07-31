@@ -25,15 +25,6 @@ export function GearFilters({
       <div className="flex items-center gap-2 font-semibold">
         <SlidersHorizontal className="size-4" /> Filter gear
       </div>
-      <label className="relative block">
-        <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-        <Input
-          className="pl-9"
-          placeholder="Search name or brand"
-          value={value.search ?? ""}
-          onChange={(event) => update("search", event.target.value)}
-        />
-      </label>
       <select
         aria-label="Category"
         className="h-10 w-full rounded-md border bg-background px-3 text-sm"

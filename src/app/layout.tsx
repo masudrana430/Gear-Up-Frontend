@@ -4,6 +4,7 @@ import { AppProviders } from "@/components/providers/app-providers";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
+import { Caveat_Brush } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +14,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const caveatBrush = Caveat_Brush({
+  variable: "--font-caveat-brush",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,7 +41,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${caveatBrush.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <AppProviders>

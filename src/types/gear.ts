@@ -35,6 +35,9 @@ export type GearQuery = ListQuery & {
   brand?: string;
   minPrice?: number;
   maxPrice?: number;
+  available?: boolean;
+  sortBy?: "createdAt" | "name" | "pricePerDay";
+  sortOrder?: "asc" | "desc";
   availableFrom?: string;
   availableTo?: string;
 };

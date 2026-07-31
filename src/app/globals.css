@@ -117,6 +117,15 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.card-brush-title {
+  font-family: var(--font-caveat-brush), cursive;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
