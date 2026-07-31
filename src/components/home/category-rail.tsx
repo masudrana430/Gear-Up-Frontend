@@ -171,7 +171,7 @@ export function CategoryRail({ showHeading = false }: CategoryRailProps) {
                   )}&page=1&limit=12&sortBy=createdAt&sortOrder=desc`}
                   tabIndex={isDuplicate ? -1 : undefined}
                   aria-hidden={isDuplicate}
-                  className="group relative mr-3 h-[82px] w-[140px] shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-200 shadow-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:border-cyan-400 hover:shadow-lg dark:border-white/10 dark:bg-slate-800 sm:h-[88px] sm:w-[150px]"
+                  className="group relative mr-3 h-[82px] w-[140px] shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-200 shadow-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:border-cyan-400 hover:shadow-lg dark:border-white/10 dark:bg-slate-800 sm:h-[160px] sm:w-[200px]"
                 >
                   <div
                     className="absolute inset-0 bg-cover bg-center transition duration-500 group-hover:scale-110"
