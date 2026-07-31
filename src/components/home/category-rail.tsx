@@ -40,9 +40,7 @@ type CategoryRailProps = {
   showHeading?: boolean;
 };
 
-export function CategoryRail({
-  showHeading = false,
-}: CategoryRailProps) {
+export function CategoryRail({ showHeading = false }: CategoryRailProps) {
   const railRef = useRef<HTMLDivElement>(null);
   const isHoveringRef = useRef(false);
   const isDraggingRef = useRef(false);
@@ -122,6 +120,10 @@ export function CategoryRail({
           }}
           onPointerLeave={() => {
             isHoveringRef.current = false;
+
+            if (isDraggingRef.current) {
+              finishDragging();
+            }
           }}
           onPointerDown={(event) => {
             if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -137,7 +139,7 @@ export function CategoryRail({
               scrollLeft: rail.scrollLeft,
             };
 
-            rail.setPointerCapture(event.pointerId);
+            // rail.setPointerCapture(event.pointerId);
           }}
           onPointerMove={(event) => {
             if (!isDraggingRef.current) return;
@@ -152,11 +154,7 @@ export function CategoryRail({
             rail.scrollLeft = dragStartRef.current.scrollLeft - distance;
             keepScrollLooping(rail);
           }}
-          onPointerUp={(event) => {
-            if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-              event.currentTarget.releasePointerCapture(event.pointerId);
-            }
-
+          onPointerUp={() => {
             finishDragging();
           }}
           onPointerCancel={finishDragging}
@@ -173,11 +171,6 @@ export function CategoryRail({
                   )}&page=1&limit=12&sortBy=createdAt&sortOrder=desc`}
                   tabIndex={isDuplicate ? -1 : undefined}
                   aria-hidden={isDuplicate}
-                  onClick={(event) => {
-                    if (wasDraggedRef.current) {
-                      event.preventDefault();
-                    }
-                  }}
                   className="group relative mr-3 h-[82px] w-[140px] shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-slate-200 shadow-sm transition duration-300 hover:-translate-y-1 hover:scale-105 hover:border-cyan-400 hover:shadow-lg dark:border-white/10 dark:bg-slate-800 sm:h-[88px] sm:w-[150px]"
                 >
                   <div
