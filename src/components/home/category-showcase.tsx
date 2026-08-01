@@ -44,7 +44,6 @@ const categories = [
   },
 ];
 
-// The previews become smaller toward the right side.
 const previewWidths = ["16%", "10%", "7%", "5%", "4%"];
 
 type RotationDirection = "next" | "previous";
@@ -95,13 +94,11 @@ export function CategoryShowcase() {
 
     void exitAnimation.finished.then(
       () => {
-        setActiveIndex((current) => {
-          if (movement === "next") {
-            return (current + 1) % categories.length;
-          }
-
-          return (current - 1 + categories.length) % categories.length;
-        });
+        setActiveIndex((current) =>
+          movement === "next"
+            ? (current + 1) % categories.length
+            : (current - 1 + categories.length) % categories.length,
+        );
 
         window.requestAnimationFrame(() => {
           const updatedTrack = trackRef.current;
@@ -140,19 +137,33 @@ export function CategoryShowcase() {
   };
 
   return (
-    <section className="border-y border-slate-200 bg-white py-16 text-slate-950 sm:py-20">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6">
+    <section className="relative isolate overflow-hidden border-y border-slate-200 bg-white py-16 text-slate-950 sm:py-20 dark:border-white/10 dark:bg-[#050b1f] dark:text-white">
+      {/* Dark-mode background effects */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-32 -top-40 hidden size-[32rem] rounded-full bg-cyan-400/15 blur-3xl dark:block"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-52 -right-24 hidden size-[34rem] rounded-full bg-violet-500/20 blur-3xl dark:block"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 hidden opacity-20 dark:block [background-image:linear-gradient(rgba(103,232,249,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.1)_1px,transparent_1px)] [background-size:34px_34px]"
+      />
+
+      <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
-            <p className="text-xs font-bold tracking-[0.18em] text-indigo-600">
+            <p className="text-xs font-bold tracking-[0.18em] text-indigo-600 dark:text-cyan-300">
               EXPLORE GEARUP
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">
               Choose your next activity.
             </h2>
 
-            <p className="mt-2 text-base text-slate-600">
+            <p className="mt-2 text-base text-slate-600 dark:text-slate-300">
               Browse rental gear made for every kind of adventure.
             </p>
           </div>
@@ -163,7 +174,7 @@ export function CategoryShowcase() {
               aria-label="Previous category"
               onClick={() => rotate("previous")}
               disabled={isAnimating}
-              className="grid size-9 place-items-center rounded border border-indigo-100 bg-indigo-50 text-indigo-600 transition hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
             >
               <ChevronLeft className="size-4" />
             </button>
@@ -173,21 +184,21 @@ export function CategoryShowcase() {
               aria-label="Next category"
               onClick={() => rotate("next")}
               disabled={isAnimating}
-              className="grid size-9 place-items-center rounded border border-indigo-100 bg-indigo-50 text-indigo-600 transition hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
             >
               <ChevronRight className="size-4" />
             </button>
           </div>
         </div>
 
-        <div className="overflow-hidden [perspective:1200px]">
+        <div className="overflow-hidden [perspective:1200px] dark:rounded-[1.35rem] dark:border dark:border-white/10 dark:bg-white/[0.025] dark:p-2">
           <div
             ref={trackRef}
             className="flex gap-2.5 will-change-transform"
           >
             <Link
               href={categoryHref(featuredCategory.slug)}
-              className="group relative h-[290px] shrink-0 basis-[72%] overflow-hidden rounded-md bg-slate-950 sm:h-[340px] sm:basis-[64%]"
+              className="group relative h-[290px] shrink-0 basis-[72%] overflow-hidden rounded-xl border border-white/10 bg-slate-950 shadow-xl shadow-slate-950/20 sm:h-[340px] sm:basis-[64%] dark:shadow-[0_20px_65px_rgba(0,0,0,0.55)]"
             >
               <Image
                 src={featuredCategory.image}
@@ -198,7 +209,7 @@ export function CategoryShowcase() {
                 className="object-cover transition duration-700 group-hover:scale-105"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-[#050816]/35 to-transparent" />
 
               <div className="absolute inset-x-5 bottom-5 text-white sm:inset-x-6 sm:bottom-6">
                 <p className="text-xs font-bold tracking-[0.16em] text-cyan-200">
@@ -208,6 +219,10 @@ export function CategoryShowcase() {
                 <h3 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">
                   {featuredCategory.name}
                 </h3>
+
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-cyan-100 opacity-0 transition duration-300 group-hover:opacity-100">
+                  Explore gear <ArrowUpRight className="size-4" />
+                </span>
               </div>
             </Link>
 
@@ -218,7 +233,7 @@ export function CategoryShowcase() {
                 style={{
                   flexBasis: previewWidths[previewIndex] ?? "3%",
                 }}
-                className="group relative h-[290px] shrink-0 overflow-hidden rounded-md bg-slate-900 transition-[flex-basis] duration-700 sm:h-[340px]"
+                className="group relative h-[290px] shrink-0 overflow-hidden rounded-xl border border-white/10 bg-slate-900 transition-[flex-basis,transform] duration-700 hover:-translate-y-1 sm:h-[340px]"
               >
                 <Image
                   src={category.image}
@@ -228,7 +243,7 @@ export function CategoryShowcase() {
                   className="object-cover transition duration-500 group-hover:scale-110"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-[#050816]/15 to-transparent" />
 
                 {previewIndex === 0 && (
                   <p className="absolute inset-x-3 bottom-3 text-sm font-bold text-white">
@@ -240,15 +255,15 @@ export function CategoryShowcase() {
           </div>
         </div>
 
-        <div className="mt-5 grid gap-4 border-t border-slate-200 pt-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
-          <p className="max-w-2xl text-sm leading-6 text-slate-600">
+        <div className="mt-5 grid gap-4 border-t border-slate-200 pt-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end dark:border-white/10">
+          <p className="max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-300">
             {featuredCategory.description} Reserve from trusted providers and
             prepare for your next outing.
           </p>
 
           <Link
             href={categoryHref(featuredCategory.slug)}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded border border-indigo-200 px-4 text-sm font-semibold text-indigo-700 transition hover:border-indigo-600 hover:bg-indigo-600 hover:text-white"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-indigo-200 px-4 text-sm font-semibold text-indigo-700 transition duration-300 hover:-translate-y-0.5 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200 dark:hover:border-cyan-300 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
           >
             Browse {featuredCategory.name}
             <ArrowUpRight className="size-4" />
