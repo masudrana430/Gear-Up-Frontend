@@ -10,6 +10,7 @@ import { CategoryRail } from "@/components/home/category-rail";
 import { GearGrid } from "@/components/gear/gear-grid";
 import { MarketplaceActions } from "@/components/home/marketplace-actions";
 import { GearFlowSection } from "@/components/home/gear-flow-section";
+import { CategoryShowcase } from "@/components/home/category-showcase";
 
 const features = [
   {
@@ -72,6 +73,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CategoryShowcase />
     </main>
   );
 }

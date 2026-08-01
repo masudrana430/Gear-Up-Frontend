@@ -260,22 +260,44 @@ function RentalMomentum() {
             className="pointer-events-none absolute inset-0 size-full overflow-visible"
           >
             <defs>
-              <linearGradient id="momentum-ribbon-one" x1="0" x2="1">
-                <stop offset="0%" stopColor="#24d9d3" stopOpacity="0.08" />
-                <stop offset="42%" stopColor="#6d75ff" stopOpacity="0.95" />
-                <stop offset="68%" stopColor="#d677ff" stopOpacity="0.85" />
-                <stop offset="100%" stopColor="#47ece3" stopOpacity="0.1" />
+              <linearGradient
+                id="gearup-infinity-blue"
+                x1="0"
+                y1="0"
+                x2="1200"
+                y2="0"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stopColor="#19e6df" stopOpacity="0.1" />
+                <stop offset="28%" stopColor="#45adff" />
+                <stop offset="54%" stopColor="#8e70ff" />
+                <stop offset="78%" stopColor="#df7cff" />
+                <stop offset="100%" stopColor="#22e9df" stopOpacity="0.1" />
               </linearGradient>
 
-              <linearGradient id="momentum-ribbon-two" x1="0" x2="1">
-                <stop offset="0%" stopColor="#ffbd9e" stopOpacity="0.08" />
-                <stop offset="42%" stopColor="#ef84c7" stopOpacity="0.9" />
-                <stop offset="67%" stopColor="#695cff" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#4fdfe4" stopOpacity="0.1" />
+              <linearGradient
+                id="gearup-infinity-pink"
+                x1="0"
+                y1="0"
+                x2="1200"
+                y2="0"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0%" stopColor="#ffae9e" stopOpacity="0.1" />
+                <stop offset="26%" stopColor="#ff83c7" />
+                <stop offset="52%" stopColor="#a36cff" />
+                <stop offset="76%" stopColor="#4ec9ff" />
+                <stop offset="100%" stopColor="#24eee0" stopOpacity="0.1" />
               </linearGradient>
 
-              <filter id="momentum-glow">
-                <feGaussianBlur stdDeviation="3.5" result="blur" />
+              <filter
+                id="gearup-infinity-glow"
+                x="-30%"
+                y="-100%"
+                width="160%"
+                height="300%"
+              >
+                <feGaussianBlur stdDeviation="6" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
@@ -283,56 +305,108 @@ function RentalMomentum() {
               </filter>
             </defs>
 
+            {/* Permanent, soft infinity lines */}
             <path
-              className="gearup-momentum-ribbon gearup-momentum-ribbon-one"
-              d="M-60 205 C150 245 245 42 475 122 S815 278 1260 72"
+              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
               fill="none"
-              filter="url(#momentum-glow)"
-              stroke="url(#momentum-ribbon-one)"
+              stroke="url(#gearup-infinity-blue)"
               strokeLinecap="round"
-              strokeWidth="7"
+              strokeWidth="3"
+              strokeOpacity="0.32"
             />
 
             <path
-              className="gearup-momentum-ribbon gearup-momentum-ribbon-two"
-              d="M-60 95 C150 22 286 250 520 160 S860 30 1260 205"
+              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
               fill="none"
-              filter="url(#momentum-glow)"
-              stroke="url(#momentum-ribbon-two)"
+              stroke="url(#gearup-infinity-pink)"
               strokeLinecap="round"
-              strokeWidth="6"
+              strokeWidth="3"
+              strokeOpacity="0.32"
             />
 
-            <circle
-              className="gearup-momentum-pulse"
-              cx="208"
-              cy="170"
-              r="5"
-              fill="#7dfcf2"
-            />
-            <circle
-              className="gearup-momentum-pulse gearup-momentum-pulse-delay"
-              cx="950"
-              cy="111"
-              r="5"
-              fill="#d9b4ff"
-            />
+            {/* Blue moving glow */}
+            <path
+              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
+              fill="none"
+              filter="url(#gearup-infinity-glow)"
+              pathLength="100"
+              stroke="url(#gearup-infinity-blue)"
+              strokeDasharray="38 12"
+              strokeLinecap="round"
+              strokeWidth="8"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-50"
+                dur="2.7s"
+                repeatCount="indefinite"
+                calcMode="linear"
+              />
+            </path>
+
+            {/* Pink moving glow — opposite direction */}
+            <path
+              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
+              fill="none"
+              filter="url(#gearup-infinity-glow)"
+              pathLength="100"
+              stroke="url(#gearup-infinity-pink)"
+              strokeDasharray="38 12"
+              strokeLinecap="round"
+              strokeWidth="8"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="-50"
+                to="0"
+                dur="2.7s"
+                repeatCount="indefinite"
+                calcMode="linear"
+              />
+            </path>
+
+            {/* Sharp energy on top of the glow */}
+            <path
+              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
+              fill="none"
+              pathLength="100"
+              stroke="url(#gearup-infinity-blue)"
+              strokeDasharray="38 12"
+              strokeLinecap="round"
+              strokeWidth="3"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-50"
+                dur="2.7s"
+                repeatCount="indefinite"
+                calcMode="linear"
+              />
+            </path>
+
+            <path
+              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
+              fill="none"
+              pathLength="100"
+              stroke="url(#gearup-infinity-pink)"
+              strokeDasharray="38 12"
+              strokeLinecap="round"
+              strokeWidth="3"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="-50"
+                to="0"
+                dur="2.7s"
+                repeatCount="indefinite"
+                calcMode="linear"
+              />
+            </path>
           </svg>
 
-          <div className="absolute left-1/2 top-1/2 size-28 -translate-x-1/2 -translate-y-1/2 sm:size-32">
-            <div className="gearup-momentum-orbit absolute -inset-4 rounded-full border border-dashed border-violet-300/70" />
-
-            <div className="relative grid size-full place-items-center rounded-full border border-cyan-100/20 bg-gradient-to-br from-violet-500 via-indigo-600 to-[#15185a] shadow-[0_0_70px_rgba(116,91,255,0.7)]">
-              <div className="text-center">
-                <p className="font-sans text-lg font-black text-white sm:text-xl">
-                  GearUp
-                </p>
-                <p className="mt-1 font-sans text-[9px] font-bold tracking-[0.16em] text-indigo-100">
-                  READY TO GO
-                </p>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         <div className="grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3">
