@@ -11,6 +11,7 @@ import { GearGrid } from "@/components/gear/gear-grid";
 import { MarketplaceActions } from "@/components/home/marketplace-actions";
 import { GearFlowSection } from "@/components/home/gear-flow-section";
 import { CategoryShowcase } from "@/components/home/category-showcase";
+import Newsletter from "@/components/home/Newsletter";
 
 const features = [
   {
@@ -36,9 +37,8 @@ export default function Home() {
       <VideoHero />
       <CategoryRail />
       <MarketplaceActions />
-      
 
-      <section className="mx-auto max-w-8xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
           <div>
             <p className="text-sm font-semibold text-primary">AVAILABLE NOW</p>
@@ -59,7 +59,7 @@ export default function Home() {
       <GearFlowSection />
 
       <section className="border-y bg-muted/30">
-        <div className="mx-auto max-w-8xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
           <div className="grid gap-6 md:grid-cols-3">
             {features.map(({ icon: Icon, title, text }) => (
               <article key={title} className="rounded-2xl border bg-card p-6">
@@ -75,6 +75,7 @@ export default function Home() {
       </section>
 
       <CategoryShowcase />
+      <Newsletter />
     </main>
   );
 }

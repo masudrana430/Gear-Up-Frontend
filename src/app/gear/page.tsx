@@ -33,7 +33,7 @@ export default function GearPage() {
   return (
     <Suspense
       fallback={
-        <main className="mx-auto w-full max-w-8xl flex-1 px-4 py-10 sm:px-6">
+        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6">
           <div className="h-10 w-64 animate-pulse rounded bg-muted" />
         </main>
       }
@@ -177,7 +177,7 @@ function GearPageContent() {
     <>
       <CategoryRail showHeading />
 
-      <main className="mx-auto w-full max-w-8xl flex-1 px-4 py-10 sm:px-6">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-10 sm:px-6">
         <div className="mb-8">
           <p className="text-sm font-semibold text-primary">
             EQUIPMENT FOR EVERY ADVENTURE

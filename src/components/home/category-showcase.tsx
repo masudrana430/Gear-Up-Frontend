@@ -152,7 +152,7 @@ export function CategoryShowcase() {
         className="absolute inset-0 hidden opacity-20 dark:block [background-image:linear-gradient(rgba(103,232,249,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.1)_1px,transparent_1px)] [background-size:34px_34px]"
       />
 
-      <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="text-xs font-bold tracking-[0.18em] text-indigo-600 dark:text-cyan-300">
@@ -192,10 +192,7 @@ export function CategoryShowcase() {
         </div>
 
         <div className="overflow-hidden [perspective:1200px] dark:rounded-[1.35rem] dark:border dark:border-white/10 dark:bg-white/[0.025] dark:p-2">
-          <div
-            ref={trackRef}
-            className="flex gap-2.5 will-change-transform"
-          >
+          <div ref={trackRef} className="flex gap-2.5 will-change-transform">
             <Link
               href={categoryHref(featuredCategory.slug)}
               className="group relative h-[290px] shrink-0 basis-[72%] overflow-hidden rounded-xl border border-white/10 bg-slate-950 shadow-xl shadow-slate-950/20 sm:h-[340px] sm:basis-[64%] dark:shadow-[0_20px_65px_rgba(0,0,0,0.55)]"

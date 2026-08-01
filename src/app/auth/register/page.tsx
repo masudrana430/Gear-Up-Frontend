@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Create account | GearUp" };
 export default function RegisterPage() {
   return (
     <main className="mx-auto flex w-full flex-1 items-center px-4 py-8 sm:px-6 lg:px-8">
-      <section className="mx-auto grid w-full max-w-8xl overflow-hidden rounded-[2rem] border bg-card shadow-xl lg:min-h-[720px] lg:grid-cols-[1.15fr_0.85fr]">
+      <section className="mx-auto grid w-full max-w-7xl overflow-hidden rounded-[2rem] border bg-card shadow-xl lg:min-h-[720px] lg:grid-cols-[1.15fr_0.85fr]">
         {/* Left: registration form */}
         <div className="relative flex items-center overflow-hidden bg-gradient-to-br from-primary/10 via-card to-card px-6 py-10 sm:px-10 lg:px-14">
           <div

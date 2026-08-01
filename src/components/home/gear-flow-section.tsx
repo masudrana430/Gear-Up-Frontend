@@ -405,8 +405,6 @@ function RentalMomentum() {
               />
             </path>
           </svg>
-
-          
         </div>
 
         <div className="grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3">
@@ -434,7 +432,7 @@ function RentalMomentum() {
 export function GearFlowSection() {
   return (
     <section className="overflow-hidden bg-[#071334] py-20 text-white sm:py-28">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-sm font-bold tracking-[0.2em] text-cyan-300">
             BUILT FOR RELIABLE RENTALS

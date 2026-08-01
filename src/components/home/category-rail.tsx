@@ -103,7 +103,7 @@ export function CategoryRail({ showHeading = false }: CategoryRailProps) {
       aria-label="Shop gear by activity"
       className="border-b border-slate-200 bg-white dark:border-white/10 dark:bg-background"
     >
-      <div className="mx-auto max-w-8xl px-4 py-6 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         {showHeading && (
           <h2 className="mb-4 text-2xl font-bold tracking-tight text-slate-800 dark:text-white">
             Shop by activity

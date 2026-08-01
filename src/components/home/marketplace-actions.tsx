@@ -59,7 +59,7 @@ export function MarketplaceActions() {
         className="absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-[#03141d]/95 via-[#03141d]/50 to-transparent"
       />
 
-      <div className="relative z-10 mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl">
           <div className="flex items-center gap-3">
             <span className="grid size-11 place-items-center rounded-xl border border-cyan-200/30 bg-cyan-300/10 text-cyan-200">
