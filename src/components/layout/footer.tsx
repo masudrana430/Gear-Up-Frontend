@@ -3,14 +3,8 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Check,
-  Mail,
-  MapPin,
-  Mountain,
-  Send,
-} from "lucide-react";
+import { ArrowRight, Check, Mail, MapPin, Mountain, Send } from "lucide-react";
+import { AnimatedEarth } from "@/components/layout/animated-earth";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -55,8 +49,8 @@ export function Footer() {
             </h2>
 
             <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
-              Get outdoor ideas, useful rental tips, and new GearUp updates.
-              No spam—just better adventures.
+              Get outdoor ideas, useful rental tips, and new GearUp updates. No
+              spam—just better adventures.
             </p>
 
             <form
@@ -137,20 +131,7 @@ export function Footer() {
             </div>
 
             {/* Original abstract rental-globe visual */}
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-24 -right-20 hidden size-[380px] rounded-full border border-cyan-200/50 bg-[radial-gradient(circle_at_45%_36%,rgba(101,240,255,0.4),transparent_2px),radial-gradient(circle_at_58%_60%,rgba(255,255,255,0.7),transparent_1.5px),radial-gradient(circle_at_52%_48%,rgba(116,91,255,0.28),transparent_53%)] bg-[length:15px_15px,11px_11px,auto] shadow-[0_0_80px_rgba(66,220,255,0.18)] dark:border-slate-200 dark:shadow-[0_0_60px_rgba(99,102,241,0.14)] lg:block"
-            >
-              <div className="absolute inset-8 rounded-full border border-dashed border-violet-300/50 dark:border-indigo-300/60" />
-
-              <div className="absolute inset-[68px] grid place-items-center rounded-full border border-cyan-100/20 bg-slate-950/50 dark:border-slate-200 dark:bg-white/70">
-                <Mountain className="size-20 text-cyan-100/80 dark:text-indigo-700" />
-              </div>
-
-              <MapPin className="absolute left-[34%] top-[24%] size-6 text-cyan-200 dark:text-cyan-700" />
-              <MapPin className="absolute right-[24%] top-[42%] size-5 text-violet-300 dark:text-violet-600" />
-              <MapPin className="absolute bottom-[28%] left-[42%] size-5 text-fuchsia-300 dark:text-fuchsia-600" />
-            </div>
+            <AnimatedEarth className="absolute -bottom-24 -right-20 hidden size-[380px] lg:block" />
           </section>
 
           <div className="relative z-10 grid gap-12 pb-2 lg:grid-cols-[1.4fr_repeat(3,0.7fr)]">
@@ -161,7 +142,8 @@ export function Footer() {
                 </span>
 
                 <span className="text-xl font-black">
-                  Gear<span className="text-cyan-300 dark:text-cyan-700">Up</span>
+                  Gear
+                  <span className="text-cyan-300 dark:text-cyan-700">Up</span>
                 </span>
               </Link>
 
