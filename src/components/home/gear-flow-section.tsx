@@ -252,7 +252,7 @@ function RentalMomentum() {
           </p>
         </div>
 
-        <div className="relative min-h-[250px]">
+        <div className="relative hidden min-h-[250px] md:block">
           <svg
             aria-hidden="true"
             viewBox="0 0 1200 280"
