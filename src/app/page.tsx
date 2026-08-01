@@ -9,6 +9,7 @@ import { VideoHero } from "@/components/home/video-hero";
 import { CategoryRail } from "@/components/home/category-rail";
 import { GearGrid } from "@/components/gear/gear-grid";
 import { MarketplaceActions } from "@/components/home/marketplace-actions";
+import { GearFlowSection } from "@/components/home/gear-flow-section";
 
 const features = [
   {
@@ -34,6 +35,7 @@ export default function Home() {
       <VideoHero />
       <CategoryRail />
       <MarketplaceActions />
+      
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
@@ -52,6 +54,8 @@ export default function Home() {
 
         <GearGrid filters={{ page: 1, limit: 3 }} />
       </section>
+
+      <GearFlowSection />
 
       <section className="border-y bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">

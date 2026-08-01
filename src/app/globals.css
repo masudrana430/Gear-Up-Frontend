@@ -124,8 +124,6 @@
   text-transform: uppercase;
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -135,5 +133,313 @@
   }
   html {
     @apply font-sans;
+  }
+}
+
+@keyframes gearup-flow-dash {
+  to {
+    stroke-dashoffset: -96;
+  }
+}
+
+@keyframes gearup-flow-pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes gearup-signal-drift {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes gearup-signal-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: translateX(-0.6%) scaleY(0.97);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(0.6%) scaleY(1.03);
+  }
+}
+
+.gearup-flow-path {
+  fill: none;
+  stroke: rgba(111, 97, 255, 0.75);
+  stroke-width: 2;
+  stroke-dasharray: 7 9;
+  animation: gearup-flow-dash 2.8s linear infinite;
+}
+
+.gearup-flow-pulse {
+  fill: #61f7e9;
+  filter: drop-shadow(0 0 9px #61f7e9);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gearup-flow-pulse 1.8s ease-in-out infinite;
+}
+
+.gearup-flow-pulse-delay {
+  animation-delay: -0.9s;
+}
+
+.gearup-flow-node {
+  animation: gearup-node-float 4.6s ease-in-out infinite;
+}
+
+.gearup-signal-group {
+  transform-origin: center;
+  animation: gearup-signal-breathe 7s ease-in-out infinite;
+}
+
+.gearup-signal-line {
+  stroke-dasharray: 3 7;
+  animation: gearup-signal-drift 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-flow-path,
+  .gearup-flow-pulse,
+  .gearup-flow-node,
+  .gearup-signal-group,
+  .gearup-signal-line {
+    animation: none;
+  }
+}
+
+@keyframes gearup-node-float {
+  0%,
+  100% {
+    translate: 0 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+  }
+
+  50% {
+    translate: 0 -7px;
+    box-shadow: 0 22px 45px rgba(66, 92, 255, 0.3);
+  }
+}
+
+@keyframes gearup-center-ring-spin {
+  to {
+    stroke-dashoffset: -70;
+    rotate: 360deg;
+  }
+}
+
+.gearup-flow-node {
+  animation: gearup-node-float 4.6s ease-in-out infinite;
+}
+
+.gearup-flow-node-delay-1 {
+  animation-delay: -1.2s;
+}
+
+.gearup-flow-node-delay-2 {
+  animation-delay: -2.4s;
+}
+
+.gearup-flow-node-delay-3 {
+  animation-delay: -3.4s;
+}
+
+.gearup-center-ring {
+  fill: none;
+  stroke: rgba(129, 111, 255, 0.8);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 8;
+  filter: drop-shadow(0 0 9px rgba(119, 98, 255, 0.9));
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gearup-center-ring-spin 7s linear infinite;
+}
+
+@keyframes gearup-core-orbit {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.gearup-core-orbit {
+  box-shadow:
+    0 0 20px rgba(126, 105, 255, 0.65),
+    inset 0 0 18px rgba(87, 247, 234, 0.15);
+  animation: gearup-core-orbit 9s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-core-orbit {
+    animation: none;
+  }
+}
+
+@keyframes gearup-core-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@keyframes gearup-core-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.gearup-core-float {
+  animation: gearup-core-float 4.6s ease-in-out infinite;
+}
+
+@keyframes gearup-ribbon-drift {
+  0%,
+  100% {
+    transform: translateX(-0.8%) scaleY(0.97);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translateX(0.8%) scaleY(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes gearup-ribbon-travel {
+  to {
+    stroke-dashoffset: -820;
+  }
+}
+
+.gearup-ribbon-a,
+.gearup-ribbon-b {
+  transform-origin: center;
+  animation: gearup-ribbon-drift 8s ease-in-out infinite;
+}
+
+.gearup-ribbon-b {
+  animation-delay: -4s;
+}
+
+.gearup-ribbon-line {
+  stroke-dasharray: 760 60;
+  animation: gearup-ribbon-travel 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-ribbon-a,
+  .gearup-ribbon-b,
+  .gearup-ribbon-line {
+    animation: none;
+  }
+}
+
+.gearup-momentum {
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(105, 92, 255, 0.2),
+      transparent 32%
+    ),
+    linear-gradient(135deg, #07112c 0%, #0a1a45 52%, #0b1637 100%);
+  box-shadow: 0 32px 100px rgba(1, 7, 28, 0.55);
+}
+
+.gearup-momentum-grid {
+  opacity: 0.4;
+  background-image:
+    linear-gradient(rgba(128, 151, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128, 151, 255, 0.1) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at center, black, transparent 78%);
+}
+
+.gearup-momentum-ribbon {
+  stroke-dasharray: 950 85;
+  animation: gearup-momentum-travel 11s linear infinite;
+}
+
+.gearup-momentum-ribbon-two {
+  animation-delay: -5.5s;
+}
+
+.gearup-momentum-orbit {
+  box-shadow:
+    0 0 24px rgba(174, 132, 255, 0.75),
+    inset 0 0 18px rgba(104, 224, 255, 0.25);
+  animation: gearup-momentum-orbit 10s linear infinite;
+}
+
+.gearup-momentum-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gearup-momentum-pulse 2.5s ease-in-out infinite;
+}
+
+.gearup-momentum-pulse-delay {
+  animation-delay: -1.2s;
+}
+
+.gearup-momentum-step {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.gearup-momentum-step:hover {
+  transform: translateY(-5px);
+  border-color: rgba(103, 232, 249, 0.45);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@keyframes gearup-momentum-travel {
+  to {
+    stroke-dashoffset: -1035;
+  }
+}
+
+@keyframes gearup-momentum-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gearup-momentum-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-momentum-ribbon,
+  .gearup-momentum-orbit,
+  .gearup-momentum-pulse {
+    animation: none;
   }
 }
