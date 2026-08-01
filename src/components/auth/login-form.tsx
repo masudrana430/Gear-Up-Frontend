@@ -71,7 +71,7 @@ export function LoginForm() {
         )}
       </div>
       <Button
-        className="w-full"
+        className="h-12 w-full rounded-xl text-base font-semibold shadow-lg shadow-primary/20"
         type="submit"
         disabled={form.formState.isSubmitting}
       >
