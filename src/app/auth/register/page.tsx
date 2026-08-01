@@ -43,81 +43,131 @@ export default function RegisterPage() {
         </div>
 
         {/* Right: video + feature cards */}
-        <aside className="relative hidden overflow-hidden bg-slate-950 lg:block">
+        {/* Right: register feature cards */}
+        <aside className="relative hidden min-h-[720px] overflow-hidden border-l border-white/10 bg-slate-950 lg:block">
           <video
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            className="absolute inset-0 h-full w-full object-cover opacity-50"
+            className="absolute inset-0 h-full w-full object-cover opacity-100 brightness-110 saturate-125"
           >
             <source src="/videos/gearup-login.mp4" type="video/mp4" />
           </video>
 
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/90 via-slate-950/75 to-primary/55" />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/50 via-slate-950/75 to-primary/55" />
 
-          {/* Same curved divider used by the login page */}
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 180 800"
-            preserveAspectRatio="none"
-            className="absolute inset-y-0 left-0 z-10 h-full w-40 text-card"
-          >
-            <path
-              fill="currentColor"
-              d="M0 0H85C175 75 165 170 95 260C25 350 165 430 120 545C95 620 140 720 82 800H0Z"
-            />
-          </svg>
-
-          <div className="relative z-20 flex min-h-[720px] flex-col p-8 pl-20 text-white">
+          <div className="relative z-20 flex min-h-[720px] flex-col justify-center px-4 py-8">
             {/* Dark card */}
-            <div className="overflow-hidden rounded-[1.75rem] border border-white/15 bg-black/40 p-7 shadow-2xl backdrop-blur-md [mask-image:radial-gradient(3.25rem_at_100%_0,transparent_99%,black_100%)] [-webkit-mask-image:radial-gradient(3.25rem_at_100%_0,transparent_99%,black_100%)]">
-              <p className="text-xs font-semibold tracking-[0.18em] text-white/60">
-                WHY GEARUP
-              </p>
+            <div className="relative h-[450px] w-full">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 420 450"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute inset-0 h-full w-full drop-shadow-2xl"
+              >
+                <defs>
+                  <linearGradient
+                    id="register-dark-card"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#111827" stopOpacity="0.98" />
+                    <stop offset="55%" stopColor="#030712" stopOpacity="0.94" />
+                    <stop offset="100%" stopColor="#172554" stopOpacity="0.9" />
+                  </linearGradient>
+                </defs>
 
-              <p className="mt-6 text-5xl leading-none text-primary-foreground">
-                “
-              </p>
+                <path
+                  d="M30 1H295C324 1 340 17 340 42C340 55 351 64 365 64H383C405 64 419 79 419 101V420C419 438 407 449 389 449H30C13 449 1 437 1 420V30C1 13 13 1 30 1Z"
+                  fill="url(#register-dark-card)"
+                  stroke="rgba(255,255,255,0.16)"
+                  strokeWidth="1.5"
+                />
+              </svg>
 
-              <h2 className="mt-2 text-3xl font-bold leading-tight">
-                Everything you need for your next adventure.
-              </h2>
+              <div className="relative z-10 flex h-full flex-col p-8 pr-16 text-white">
+                <p className="text-xs font-semibold tracking-[0.18em] text-white/60">
+                  WHY GEARUP
+                </p>
 
-              <p className="mt-5 text-sm leading-6 text-white/70">
-                Discover reliable gear, book faster, and manage every rental in
-                one simple place.
-              </p>
+                <p className="mt-6 text-5xl leading-none text-primary-foreground">
+                  “
+                </p>
 
-              <div className="mt-8 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                  G
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">GearUp community</p>
-                  <p className="text-xs text-white/60">
-                    Built for renters and providers
-                  </p>
+                <h2 className="mt-2 max-w-[230px] text-3xl font-bold leading-tight">
+                  Everything you need for your next adventure.
+                </h2>
+
+                <p className="mt-5 max-w-[230px] text-sm leading-6 text-white/70">
+                  Discover reliable gear, book faster, and manage every rental
+                  in one simple place.
+                </p>
+
+                <div className="mt-auto flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                    G
+                  </div>
+
+                  <div>
+                    <p className="text-sm font-semibold">GearUp community</p>
+                    <p className="text-xs text-white/60">
+                      Built for renters and providers
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* White card */}
-            <div className="mt-auto ml-8 overflow-hidden rounded-[1.5rem] border border-white/40 bg-card p-6 text-card-foreground shadow-2xl [mask-image:radial-gradient(3.25rem_at_100%_0,transparent_99%,black_100%)] [-webkit-mask-image:radial-gradient(3.25rem_at_100%_0,transparent_99%,black_100%)]">
-              <p className="text-lg font-bold leading-tight">
-                Rent smarter.
-                <br />
-                Explore further.
-              </p>
-              <p className="mt-3 text-sm leading-5 text-muted-foreground">
-                Create an account and start your GearUp journey today.
-              </p>
+            {/* White overlapping card */}
+            <div className="relative z-10 -mt-20 ml-5 h-[190px] w-[calc(100%-1.25rem)]">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 380 190"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute inset-0 h-full w-full drop-shadow-2xl"
+              >
+                <defs>
+                  <linearGradient
+                    id="register-light-card"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="70%" stopColor="#f8fafc" />
+                    <stop offset="100%" stopColor="#dbeafe" />
+                  </linearGradient>
+                </defs>
 
-              <div className="mt-5 flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-primary/30" />
+                <path
+                  d="M24 1H242C266 1 280 15 280 37C280 51 292 62 308 62H337C360 62 379 81 379 104V166C379 180 370 189 356 189H24C11 189 1 179 1 166V24C1 11 11 1 24 1Z"
+                  fill="url(#register-light-card)"
+                  stroke="rgba(255,255,255,0.9)"
+                  strokeWidth="1.5"
+                />
+              </svg>
+
+              <div className="relative z-10 h-full p-6 pr-16 text-slate-950">
+                <p className="text-lg font-bold leading-tight">
+                  Rent smarter.
+                  <br />
+                  Explore further.
+                </p>
+
+                <p className="mt-3 text-sm leading-5 text-slate-600">
+                  Create an account and start your GearUp journey today.
+                </p>
+
+                <div className="mt-5 flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-primary" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-primary/60" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-primary/30" />
+                </div>
               </div>
             </div>
           </div>
