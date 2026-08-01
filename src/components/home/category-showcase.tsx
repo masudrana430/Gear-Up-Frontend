@@ -141,7 +141,7 @@ export function CategoryShowcase() {
 
   return (
     <section className="border-y border-slate-200 bg-white py-16 text-slate-950 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-8xl px-4 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="text-xs font-bold tracking-[0.18em] text-indigo-600">

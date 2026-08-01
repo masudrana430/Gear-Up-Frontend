@@ -1,6 +1,6 @@
 export function VideoHero() {
   return (
-    <section className="h-[300px] w-full overflow-hidden bg-black">
+    <section className="h-[400px] w-full overflow-hidden bg-black">
       <video
         autoPlay
         loop
