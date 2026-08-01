@@ -152,7 +152,7 @@ export function CategoryShowcase() {
         className="absolute inset-0 hidden opacity-20 dark:block [background-image:linear-gradient(rgba(103,232,249,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.1)_1px,transparent_1px)] [background-size:34px_34px]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-8xl px-4 sm:px-6">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <p className="text-xs font-bold tracking-[0.18em] text-indigo-600 dark:text-cyan-300">
