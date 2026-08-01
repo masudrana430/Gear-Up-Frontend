@@ -1,21 +1,260 @@
+"use client";
+
+import type { FormEvent } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { Mountain } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Mail,
+  MapPin,
+  Mountain,
+  Send,
+} from "lucide-react";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email.trim()) {
+      setMessage("Enter your email address first.");
+      return;
+    }
+
+    // Connect this to a real newsletter API later.
+    setMessage("Newsletter form is ready for backend connection.");
+  };
+
   return (
-    <footer className="mt-auto border-t bg-muted/30">
-      <div className="mx-auto flex max-w-8xl flex-col gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <div className="flex items-center gap-2 font-medium text-foreground">
-          <Mountain className="size-4" /> GearUp
-        </div>
-        <p>Sports and outdoor equipment, ready when adventure calls.</p>
-        <div className="flex gap-4">
-          <Link href="/gear" className="hover:text-foreground">
-            Browse
-          </Link>
-          <Link href="/auth/register" className="hover:text-foreground">
-            Become a provider
-          </Link>
+    <footer className="relative overflow-hidden bg-slate-50 px-4 pb-4 pt-20 dark:bg-[#030817] sm:px-6 sm:pt-28">
+      <div className="mx-auto max-w-[1440px] rounded-[38px] border border-slate-200/80 bg-white/60 p-3 shadow-[0_30px_100px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.02] sm:p-6">
+        {/* Newsletter */}
+        <section className="relative overflow-hidden rounded-[30px] border border-slate-200 bg-white px-5 pb-24 pt-14 text-center dark:border-white/10 dark:bg-[#091431] sm:px-10 sm:pb-32 sm:pt-20">
+          <div
+            aria-hidden="true"
+            className="absolute -left-24 top-8 size-64 rounded-full bg-cyan-300/20 blur-3xl dark:bg-cyan-400/10"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute -right-20 bottom-0 size-72 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-500/15"
+          />
+
+          <div className="relative mx-auto max-w-2xl">
+            <p className="text-xs font-bold tracking-[0.2em] text-cyan-700 dark:text-cyan-300">
+              THE GEARUP FIELD NOTES
+            </p>
+
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-6xl">
+              Plan your next
+              <span className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">
+                great escape.
+              </span>
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">
+              Get outdoor ideas, useful rental tips, and new GearUp updates.
+              No spam—just better adventures.
+            </p>
+
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="mx-auto mt-8 flex max-w-xl flex-col gap-3 sm:flex-row"
+            >
+              <label className="relative flex h-12 flex-1 items-center">
+                <Mail className="absolute left-4 size-5 text-slate-400" />
+
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    setMessage("");
+                  }}
+                  placeholder="Enter your email address"
+                  className="h-full w-full rounded-xl border border-slate-200 bg-white px-12 text-sm text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-cyan-500 focus:ring-4 focus:ring-cyan-500/10 dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder:text-slate-500"
+                />
+              </label>
+
+              <button
+                type="submit"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-200"
+              >
+                Get updates
+                <Send className="size-4" />
+              </button>
+            </form>
+
+            <div className="mt-5 flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <span className="grid size-5 place-items-center rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-400/15 dark:text-emerald-300">
+                <Check className="size-3.5" />
+              </span>
+              Adventure updates only.
+            </div>
+
+            {message && (
+              <p className="mt-3 text-sm font-medium text-cyan-700 dark:text-cyan-300">
+                {message}
+              </p>
+            )}
+          </div>
+        </section>
+
+        {/* Footer: black in light mode, premium white in dark mode */}
+        <div className="relative mt-16 rounded-[30px] bg-[#050608] px-6 pb-8 pt-px text-white shadow-[0_25px_70px_rgba(0,0,0,0.25)] dark:border dark:border-slate-200 dark:bg-[radial-gradient(circle_at_92%_0%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(135deg,#ffffff_0%,#f8fafc_55%,#eef2ff_100%)] dark:text-slate-950 sm:mt-20 sm:px-10 lg:px-20">
+          {/* This card stays in layout flow, so nothing can appear beneath it. */}
+          <section className="relative z-20 mx-4 -mt-16 mb-10 min-h-[260px] overflow-hidden rounded-[28px] border border-white/10 bg-gradient-to-br from-[#171827] via-[#0a0c11] to-[#0b121e] p-7 text-white shadow-[0_24px_60px_rgba(0,0,0,0.38)] dark:border-slate-200 dark:bg-[radial-gradient(circle_at_100%_0%,rgba(99,102,241,0.14),transparent_35%),linear-gradient(135deg,#ffffff_0%,#f8fafc_60%,#ecfeff_100%)] dark:text-slate-950 sm:mx-10 sm:-mt-20 sm:mb-12 sm:min-h-[280px] sm:p-10 lg:mx-20 lg:min-h-[300px] lg:p-14">
+            <div
+              aria-hidden="true"
+              className="absolute -left-12 bottom-0 size-56 rounded-full bg-fuchsia-500/20 blur-3xl dark:bg-cyan-300/20"
+            />
+
+            <div className="relative z-10 max-w-md">
+              <p className="text-xs font-bold tracking-[0.2em] text-cyan-200 dark:text-cyan-700">
+                RENT SMARTER. EXPLORE FURTHER.
+              </p>
+
+              <h3 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
+                Local gear.
+                <br />
+                Big weekends.
+              </h3>
+
+              <p className="mt-4 max-w-sm text-sm leading-6 text-slate-300 dark:text-slate-600 sm:text-base">
+                Find the equipment you need, reserve your dates, and make room
+                for more adventure.
+              </p>
+
+              <Link
+                href="/gear"
+                className="mt-7 inline-flex h-11 items-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-200 dark:bg-slate-950 dark:text-white dark:hover:bg-cyan-600"
+              >
+                Browse gear
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            {/* Original abstract rental-globe visual */}
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-24 -right-20 hidden size-[380px] rounded-full border border-cyan-200/50 bg-[radial-gradient(circle_at_45%_36%,rgba(101,240,255,0.4),transparent_2px),radial-gradient(circle_at_58%_60%,rgba(255,255,255,0.7),transparent_1.5px),radial-gradient(circle_at_52%_48%,rgba(116,91,255,0.28),transparent_53%)] bg-[length:15px_15px,11px_11px,auto] shadow-[0_0_80px_rgba(66,220,255,0.18)] dark:border-slate-200 dark:shadow-[0_0_60px_rgba(99,102,241,0.14)] lg:block"
+            >
+              <div className="absolute inset-8 rounded-full border border-dashed border-violet-300/50 dark:border-indigo-300/60" />
+
+              <div className="absolute inset-[68px] grid place-items-center rounded-full border border-cyan-100/20 bg-slate-950/50 dark:border-slate-200 dark:bg-white/70">
+                <Mountain className="size-20 text-cyan-100/80 dark:text-indigo-700" />
+              </div>
+
+              <MapPin className="absolute left-[34%] top-[24%] size-6 text-cyan-200 dark:text-cyan-700" />
+              <MapPin className="absolute right-[24%] top-[42%] size-5 text-violet-300 dark:text-violet-600" />
+              <MapPin className="absolute bottom-[28%] left-[42%] size-5 text-fuchsia-300 dark:text-fuchsia-600" />
+            </div>
+          </section>
+
+          <div className="relative z-10 grid gap-12 pb-2 lg:grid-cols-[1.4fr_repeat(3,0.7fr)]">
+            <div>
+              <Link href="/" className="inline-flex items-center gap-2">
+                <span className="grid size-10 place-items-center rounded-2xl bg-white text-slate-950 dark:bg-slate-950 dark:text-white">
+                  <Mountain className="size-5" />
+                </span>
+
+                <span className="text-xl font-black">
+                  Gear<span className="text-cyan-300 dark:text-cyan-700">Up</span>
+                </span>
+              </Link>
+
+              <p className="mt-5 max-w-xs text-sm leading-6 text-slate-400 dark:text-slate-600">
+                Rent what you need. Share what you own. Adventure more without
+                filling your home with gear.
+              </p>
+
+              <div className="mt-6 flex items-start gap-3 text-sm text-slate-400 dark:text-slate-600">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-cyan-300 dark:text-cyan-700" />
+                <span>
+                  Built for local adventure.
+                  <br />
+                  Chattogram, Bangladesh.
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-white dark:text-slate-950">
+                Explore
+              </h4>
+
+              <div className="mt-5 space-y-3 text-sm text-slate-400 dark:text-slate-600">
+                <Link
+                  href="/gear"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  Browse gear
+                </Link>
+
+                <Link
+                  href="/auth/register"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  List your gear
+                </Link>
+
+                <Link
+                  href="/auth/register"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  Create account
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-white dark:text-slate-950">
+                Account
+              </h4>
+
+              <div className="mt-5 space-y-3 text-sm text-slate-400 dark:text-slate-600">
+                <Link
+                  href="/auth/login"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  Sign in
+                </Link>
+
+                <Link
+                  href="/auth/register"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  Join GearUp
+                </Link>
+
+                <Link
+                  href="/gear"
+                  className="block transition hover:text-cyan-300 dark:hover:text-cyan-700"
+                >
+                  Find gear nearby
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-white dark:text-slate-950">
+                Platform
+              </h4>
+
+              <div className="mt-5 space-y-3 text-sm text-slate-400 dark:text-slate-600">
+                <p>Secure payments</p>
+                <p>Rental tracking</p>
+                <p>Trusted providers</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 mt-16 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 dark:border-slate-200 dark:text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} GearUp. All rights reserved.</p>
+            <p>Made for people who would rather be outside.</p>
+          </div>
         </div>
       </div>
     </footer>
