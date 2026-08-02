@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { MagneticButton } from "../ui/magnetic-button";
 
 type RentalValues = z.infer<typeof rentalSchema>;
 
@@ -102,6 +103,7 @@ export function RentalForm({ gear }: { gear: GearItem }) {
           {...form.register("notes")}
         />
       </Field>
+      <MagneticButton strength={0.18}>
       <Button
         className="w-full"
         type="submit"
@@ -109,6 +111,7 @@ export function RentalForm({ gear }: { gear: GearItem }) {
       >
         {form.formState.isSubmitting ? "Placing rental…" : "Rent now"}
       </Button>
+      </MagneticButton>
       <p className="text-center text-xs text-muted-foreground">
         Payment becomes available after provider confirmation.
       </p>

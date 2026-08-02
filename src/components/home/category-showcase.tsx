@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState } from "react";
+import { MagneticButton } from "../ui/magnetic-button";
 
 const categories = [
   {
@@ -169,25 +170,29 @@ export function CategoryShowcase() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
-            <button
-              type="button"
-              aria-label="Previous category"
-              onClick={() => rotate("previous")}
-              disabled={isAnimating}
-              className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
-            >
-              <ChevronLeft className="size-4" />
-            </button>
+            <MagneticButton strength={0.08} disabled={isAnimating}>
+              <button
+                type="button"
+                aria-label="Previous category"
+                onClick={() => rotate("previous")}
+                disabled={isAnimating}
+                className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+            </MagneticButton>
 
-            <button
-              type="button"
-              aria-label="Next category"
-              onClick={() => rotate("next")}
-              disabled={isAnimating}
-              className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
-            >
-              <ChevronRight className="size-4" />
-            </button>
+            <MagneticButton strength={0.08} disabled={isAnimating}>
+              <button
+                title="button"
+                aria-label="Next category"
+                onClick={() => rotate("next")}
+                disabled={isAnimating}
+                className="grid size-10 place-items-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600 transition duration-300 hover:-translate-y-0.5 hover:bg-indigo-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/[0.06] dark:text-cyan-200 dark:shadow-[0_8px_30px_rgba(0,0,0,0.25)] dark:hover:border-cyan-300/50 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+            </MagneticButton>
           </div>
         </div>
 
@@ -258,13 +263,15 @@ export function CategoryShowcase() {
             prepare for your next outing.
           </p>
 
-          <Link
-            href={categoryHref(featuredCategory.slug)}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-indigo-200 px-4 text-sm font-semibold text-indigo-700 transition duration-300 hover:-translate-y-0.5 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200 dark:hover:border-cyan-300 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
-          >
-            Browse {featuredCategory.name}
-            <ArrowUpRight className="size-4" />
-          </Link>
+          <MagneticButton strength={0.18}>
+            <Link
+              href={categoryHref(featuredCategory.slug)}
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-indigo-200 px-4 text-sm font-semibold text-indigo-700 transition duration-300 hover:-translate-y-0.5 hover:border-indigo-600 hover:bg-indigo-600 hover:text-white dark:border-cyan-300/30 dark:bg-cyan-300/10 dark:text-cyan-200 dark:hover:border-cyan-300 dark:hover:bg-cyan-300 dark:hover:text-slate-950"
+            >
+              Browse {featuredCategory.name}
+              <ArrowUpRight className="size-4" />
+            </Link>
+          </MagneticButton>
         </div>
       </div>
     </section>

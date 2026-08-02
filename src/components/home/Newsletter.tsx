@@ -2,14 +2,13 @@
 
 import { type FormEvent, useState } from "react";
 import { Check, Mail, Send } from "lucide-react";
+import { MagneticButton } from "../ui/magnetic-button";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleNewsletterSubmit = (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const cleanEmail = email.trim();
@@ -73,13 +72,15 @@ export default function Newsletter() {
             />
           </label>
 
-          <button
-            type="submit"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-200"
-          >
-            Get updates
-            <Send className="size-4" />
-          </button>
+          <MagneticButton>
+            <button
+              type="submit"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-white dark:text-slate-950 dark:hover:bg-cyan-200"
+            >
+              Get updates
+              <Send className="size-4" />
+            </button>
+          </MagneticButton>
         </form>
 
         <div className="mt-5 flex items-center justify-center gap-2 text-sm text-slate-500 dark:text-slate-400">

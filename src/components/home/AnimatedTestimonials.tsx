@@ -1,10 +1,7 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Quote,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, Quote, ShieldCheck } from "lucide-react";
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { MagneticButton } from "../ui/magnetic-button";
 
 const testimonials = [
   {
@@ -94,13 +91,15 @@ export function AnimatedTestimonialsDemo() {
             Find gear near you, book securely, then get outside.
           </p>
 
-          <Link
-            href="/gear"
-            className="inline-flex w-fit items-center gap-2 text-sm font-bold text-cyan-700 transition hover:gap-3 dark:text-cyan-300"
-          >
-            Explore available gear
-            <ArrowRight className="size-4" />
-          </Link>
+          <MagneticButton strength={0.18}>
+            <Link
+              href="/gear"
+              className="inline-flex w-fit items-center gap-2 text-sm font-bold text-cyan-700 transition hover:gap-3 dark:text-cyan-300"
+            >
+              Explore available gear
+              <ArrowRight className="size-4" />
+            </Link>
+          </MagneticButton>
         </div>
       </div>
     </section>

@@ -1,12 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import {
-  ArrowRight,
-  CheckCircle2,
-  MousePointer2,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, MousePointer2 } from "lucide-react";
 import { Compare } from "@/components/ui/compare";
+import { MagneticButton } from "../ui/magnetic-button";
 
 export function OwnLessCompare() {
   return (
@@ -55,13 +52,15 @@ export function OwnLessCompare() {
             </li>
           </ul>
 
-          <Link
-            href="/gear"
-            className="mt-8 inline-flex h-12 items-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-cyan-200"
-          >
-            Browse rental gear
-            <ArrowRight className="size-4" />
-          </Link>
+          <MagneticButton strength={0.18}>
+            <Link
+              href="/gear"
+              className="mt-8 inline-flex h-12 items-center gap-2 rounded-xl bg-slate-950 px-5 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-cyan-200"
+            >
+              Browse rental gear
+              <ArrowRight className="size-4" />
+            </Link>
+          </MagneticButton>
         </div>
 
         <div className="relative">

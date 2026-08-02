@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Mountain } from "lucide-react";
+import { MagneticButton } from "../ui/magnetic-button";
 
 const actions = [
   {
@@ -82,19 +83,23 @@ export function MarketplaceActions() {
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href="/gear"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-cyan-300 px-5 font-semibold text-slate-950 transition hover:bg-cyan-200"
-            >
-              Browse gear <ArrowRight className="size-4" />
-            </Link>
+            <MagneticButton strength={0.24}>
+              <Link
+                href="/gear"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-cyan-300 px-5 font-semibold text-slate-950 transition hover:bg-cyan-200"
+              >
+                Browse gear <ArrowRight className="size-4" />
+              </Link>
+            </MagneticButton>
 
-            <Link
-              href="/auth/register"
-              className="inline-flex h-11 items-center rounded-lg border border-white/35 bg-white/10 px-5 font-semibold text-white backdrop-blur transition hover:bg-white/20"
-            >
-              List your gear
-            </Link>
+            <MagneticButton strength={0.18}>
+              <Link
+                href="/auth/register"
+                className="inline-flex h-11 items-center rounded-lg border border-white/35 bg-white/10 px-5 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              >
+                List your gear
+              </Link>
+            </MagneticButton>
           </div>
         </div>
 
@@ -126,13 +131,15 @@ export function MarketplaceActions() {
                 {action.text}
               </p>
 
-              <Link
-                href={action.href}
-                className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-900 px-4 py-3 text-sm font-semibold transition hover:bg-slate-950 hover:text-white"
-              >
-                {action.button}
-                <ArrowRight className="size-4" />
-              </Link>
+              <MagneticButton className="w-full" strength={0.16}>
+                <Link
+                  href={action.href}
+                  className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-slate-900 px-4 py-3 text-sm font-semibold transition hover:bg-slate-950 hover:text-white"
+                >
+                  {action.button}
+                  <ArrowRight className="size-4" />
+                </Link>
+              </MagneticButton>
             </article>
           ))}
         </div>

@@ -9,6 +9,7 @@ import { GearGrid } from "@/components/gear/gear-grid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CategoryRail } from "@/components/home/category-rail";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 type FilterTag = {
   id: string;
@@ -207,9 +208,11 @@ function GearPageContent() {
             placeholder="Search rental gear, brands, or equipment..."
           />
 
-          <Button type="submit" className="h-12 px-5">
-            Search
-          </Button>
+          <MagneticButton strength={0.18}>
+            <Button type="submit" className="h-12 px-5">
+              Search
+            </Button>
+          </MagneticButton>
         </form>
 
         {/* Active tags and sorting */}

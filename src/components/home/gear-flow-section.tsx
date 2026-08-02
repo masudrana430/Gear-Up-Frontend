@@ -7,6 +7,7 @@ import {
   PackageCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { MagneticButton } from "../ui/magnetic-button";
 
 const signalLines = Array.from({ length: 26 }, (_, index) => index);
 
@@ -448,19 +449,23 @@ export function GearFlowSection() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/gear"
-              className="inline-flex h-11 items-center gap-2 rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white transition hover:bg-violet-400"
-            >
-              Browse gear <ArrowRight className="size-4" />
-            </Link>
+            <MagneticButton strength={0.24}>
+              <Link
+                href="/gear"
+                className="inline-flex h-11 items-center gap-2 rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white transition hover:bg-violet-400"
+              >
+                Browse gear <ArrowRight className="size-4" />
+              </Link>
+            </MagneticButton>
 
-            <Link
-              href="/auth/register"
-              className="inline-flex h-11 items-center rounded-lg border border-indigo-200/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              Become a provider
-            </Link>
+            <MagneticButton strength={0.18}>
+              <Link
+                href="/auth/register"
+                className="inline-flex h-11 items-center rounded-lg border border-indigo-200/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Become a provider
+              </Link>
+            </MagneticButton>
           </div>
         </div>
 

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Mail, MapPin, Mountain, Send } from "lucide-react";
 import { AnimatedEarth } from "@/components/layout/animated-earth";
+import { MagneticButton } from "../ui/magnetic-button";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -25,8 +26,6 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-slate-50 px-4 pb-4 pt-20 dark:bg-[#030817] sm:px-6 sm:pt-28">
       <div className="mx-auto max-w-[1440px] rounded-[38px] border border-slate-200/80 bg-white/60 p-3 shadow-[0_30px_100px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.02] sm:p-6">
-        
-
         {/* Footer: black in light mode, premium white in dark mode */}
         <div className="relative mt-16 rounded-[30px] bg-[#050608] px-6 pb-8 pt-px text-white shadow-[0_25px_70px_rgba(0,0,0,0.25)] dark:border dark:border-slate-200 dark:bg-[radial-gradient(circle_at_92%_0%,rgba(34,211,238,0.18),transparent_30%),linear-gradient(135deg,#ffffff_0%,#f8fafc_55%,#eef2ff_100%)] dark:text-slate-950 sm:mt-20 sm:px-10 lg:px-20">
           {/* This card stays in layout flow, so nothing can appear beneath it. */}
@@ -52,13 +51,15 @@ export function Footer() {
                 for more adventure.
               </p>
 
-              <Link
-                href="/gear"
-                className="mt-7 inline-flex h-11 items-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-200 dark:bg-slate-950 dark:text-white dark:hover:bg-cyan-600"
-              >
-                Browse gear
-                <ArrowRight className="size-4" />
-              </Link>
+              <MagneticButton strength={0.18}>
+                <Link
+                  href="/gear"
+                  className="mt-7 inline-flex h-11 items-center gap-2 rounded-xl bg-white px-4 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-200 dark:bg-slate-950 dark:text-white dark:hover:bg-cyan-600"
+                >
+                  Browse gear
+                  <ArrowRight className="size-4" />
+                </Link>
+              </MagneticButton>
             </div>
 
             {/* Original abstract rental-globe visual */}

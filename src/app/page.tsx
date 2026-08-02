@@ -16,6 +16,7 @@ import { VideoHeroFooter } from "@/components/home/video-hero-footer";
 import { OwnLessCompare } from "@/components/home/own-less-compare";
 // import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { AnimatedTestimonialsDemo } from "@/components/home/AnimatedTestimonials";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 // import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const features = [
@@ -50,12 +51,14 @@ export default function Home() {
             <h2 className="mt-2 text-3xl font-bold">Featured equipment</h2>
           </div>
 
-          <Link
-            href="/gear"
-            className="hidden items-center gap-1 text-sm font-medium sm:flex"
-          >
-            View all <ArrowRight className="size-4" />
-          </Link>
+          <MagneticButton className="hidden sm:inline-flex" strength={0.16}>
+            <Link
+              href="/gear"
+              className="inline-flex items-center gap-1 text-sm font-medium"
+            >
+              View all <ArrowRight className="size-4" />
+            </Link>
+          </MagneticButton>
         </div>
 
         <GearGrid filters={{ page: 1, limit: 3 }} />
@@ -83,7 +86,7 @@ export default function Home() {
       <Newsletter />
       <VideoHeroFooter />
       <OwnLessCompare />
-      <AnimatedTestimonialsDemo/>
+      <AnimatedTestimonialsDemo />
     </main>
   );
 }

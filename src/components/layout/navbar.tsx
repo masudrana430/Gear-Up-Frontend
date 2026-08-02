@@ -13,6 +13,7 @@ import {
   Sun,
   UserPlus,
   X,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ import { useTheme } from "next-themes";
 import { useAuthStore } from "@/store/auth-store";
 import { dashboardForRole } from "@/lib/constants/routes";
 import { LogoutButton } from "@/components/auth/logout-button";
+import { MagneticButton } from "../ui/magnetic-button";
 
 type NavigationItem = {
   label: string;
@@ -35,7 +37,8 @@ function ThemeToggle({
   onToggle: () => void;
 }) {
   return (
-    <button
+    <MagneticButton strength={0.18}>
+      <button
       type="button"
       onClick={onToggle}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
@@ -61,6 +64,8 @@ function ThemeToggle({
         )}
       </span>
     </button>
+    </MagneticButton>
+    
   );
 }
 
@@ -82,6 +87,11 @@ export function Navbar() {
       label: "Browse gear",
       href: "/gear",
       icon: Compass,
+    },
+    {
+      label: "Features",
+      href: "/features",
+      icon: Sparkles,
     },
     ...(isAuthenticated && user
       ? [
@@ -214,7 +224,9 @@ export function Navbar() {
 
             <button
               type="button"
-              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                menuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen(true)}
               className="grid size-10 place-items-center rounded-xl border border-slate-200 bg-white/75 text-slate-900 shadow-sm backdrop-blur md:hidden dark:border-white/10 dark:bg-slate-900/75 dark:text-white"
@@ -277,7 +289,10 @@ export function Navbar() {
             </button>
           </div>
 
-          <nav className="relative z-10 mt-12 space-y-3" aria-label="Mobile navigation">
+          <nav
+            className="relative z-10 mt-12 space-y-3"
+            aria-label="Mobile navigation"
+          >
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.href);
