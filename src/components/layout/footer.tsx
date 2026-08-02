@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Check, Mail, MapPin, Mountain, Send } from "lucide-react";
 import { AnimatedEarth } from "@/components/layout/animated-earth";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 export function Footer() {
   const [email, setEmail] = useState("");
@@ -41,9 +42,17 @@ export function Footer() {
               </p>
 
               <h3 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-                Local gear.
-                <br />
-                Big weekends.
+                <KineticText
+                  as="span"
+                  text="Local gear."
+                  className="block [font-optical-sizing:auto]"
+                />
+
+                <KineticText
+                  as="span"
+                  text="Big weekends."
+                  className="block [font-optical-sizing:auto]"
+                />
               </h3>
 
               <p className="mt-4 max-w-sm text-sm leading-6 text-slate-300 dark:text-slate-600 sm:text-base">

@@ -3,6 +3,7 @@
 import { type FormEvent, useState } from "react";
 import { Check, Mail, Send } from "lucide-react";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -38,11 +39,18 @@ export default function Newsletter() {
           THE GEARUP FIELD NOTES
         </p>
 
-        <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-6xl">
-          Plan your next
-          <span className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">
-            great escape.
-          </span>
+        <h2 className="mt-4 text-9xl font-black tracking-tight text-slate-950 dark:text-white sm:text-9xl">
+          <KineticText
+            as="span"
+            text="Plan your next"
+            className="block [font-optical-sizing:auto]"
+          />
+
+          <KineticText
+            as="span"
+            text="great escape."
+            className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent [font-optical-sizing:auto]"
+          />
         </h2>
 
         <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-slate-600 dark:text-slate-300 sm:text-lg">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Mountain } from "lucide-react";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 const actions = [
   {
@@ -69,18 +70,34 @@ export function MarketplaceActions() {
             <span className="text-xl font-bold tracking-tight">GearUp</span>
           </div>
 
-          <p className="mt-8 text-xs font-bold tracking-[0.24em] text-cyan-200">
-            OUTDOOR EQUIPMENT, MADE SIMPLE
-          </p>
+          <KineticText
+            as="p"
+            text="OUTDOOR EQUIPMENT, MADE SIMPLE "
+            className="mt-8 text-xs font-bold tracking-[0.24em] text-cyan-200"
+          />
 
-          <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">
-            Everything you need for your next adventure.
-          </h2>
+          <KineticText
+            as="h2"
+            text="Everything you need for "
+            className="mt-3 font-sans text-4xl font-black leading-tight [font-optical-sizing:auto] sm:text-5xl"
+          />
 
-          <p className="mt-5 max-w-lg text-base leading-7 text-slate-200 sm:text-lg">
-            Rent quality outdoor equipment from trusted local providers. Explore
-            more without buying everything.
-          </p>
+          <KineticText
+            as="h2"
+            text="your next adventure."
+            className="mt-3 font-sans text-4xl font-black leading-tight [font-optical-sizing:auto] sm:text-5xl"
+          />
+
+          <KineticText
+            as="p"
+            text="Rent quality outdoor equipment from trusted local providers. "
+            className="mt-5 max-w-lg text-base leading-7 text-slate-200 sm:text-lg"
+          />
+          <KineticText
+            as="p"
+            text=" Explore more without buying everything."
+            className="mt-5 max-w-lg text-base leading-7 text-slate-200 sm:text-lg"
+          />
 
           <div className="mt-7 flex flex-wrap gap-3">
             <MagneticButton strength={0.24}>
@@ -110,9 +127,11 @@ export function MarketplaceActions() {
               className="group overflow-hidden rounded-2xl border border-white/45 bg-white p-3 text-slate-950 shadow-[0_20px_55px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_65px_rgba(0,0,0,0.5)]"
             >
               <div className="grid h-12 place-items-center">
-                <p className="card-brush-title text-center text-[2.5rem] leading-none text-slate-700 sm:text-[2.8rem]">
-                  {action.label}
-                </p>
+                <KineticText
+                  as="p"
+                  text={action.label}
+                  className="card-brush-title text-center text-[2.5rem] leading-none text-slate-700 [font-optical-sizing:auto] sm:text-[2.8rem]"
+                />
               </div>
               {/* Middle image of each card */}
               <div className="relative mt-3 h-44 overflow-hidden rounded-xl bg-slate-200">

@@ -17,6 +17,7 @@ import { OwnLessCompare } from "@/components/home/own-less-compare";
 // import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { AnimatedTestimonialsDemo } from "@/components/home/AnimatedTestimonials";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { KineticText } from "@/components/ui/kinetic-text";
 // import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const features = [
@@ -47,8 +48,19 @@ export default function Home() {
       <section className="mx-auto max-w-8xl px-4 py-16 sm:px-6">
         <div className="mb-8 flex items-end justify-between">
           <div>
-            <p className="text-sm font-semibold text-primary">AVAILABLE NOW</p>
-            <h2 className="mt-2 text-3xl font-bold">Featured equipment</h2>
+            {/* <p className="text-sm font-semibold text-primary">AVAILABLE NOW</p> */}
+            <KineticText
+              as="p"
+              text="AVAILABLE NOW"
+              className="text-sm font-semibold text-primary"
+            />
+
+            <KineticText
+              as="h2"
+              text="Featured equipment"
+              className="mt-2 text-3xl font-bold"
+            />
+            {/* <h2 className="mt-2 text-3xl font-bold">Featured equipment</h2> */}
           </div>
 
           <MagneticButton className="hidden sm:inline-flex" strength={0.16}>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 const categories = [
   {
@@ -160,9 +161,11 @@ export function CategoryShowcase() {
               EXPLORE GEARUP
             </p>
 
-            <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">
-              Choose your next activity.
-            </h2>
+            <KineticText
+              as="h2"
+              text="Choose your next activity."
+              className="mt-2 font-sans text-3xl font-bold tracking-tight text-slate-950 [font-optical-sizing:auto] dark:text-white sm:text-4xl"
+            />
 
             <p className="mt-2 text-base text-slate-600 dark:text-slate-300">
               Browse rental gear made for every kind of adventure.

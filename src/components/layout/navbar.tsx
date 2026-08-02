@@ -20,6 +20,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { dashboardForRole } from "@/lib/constants/routes";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { MagneticButton } from "../ui/magnetic-button";
 
 type NavigationItem = {
   label: string;
@@ -168,10 +169,13 @@ export function Navbar() {
 
             {isAuthenticated && user ? (
               <div className="hidden md:block">
+                <MagneticButton strength={0.18}>
                 <LogoutButton compact />
+                </MagneticButton>
               </div>
             ) : (
               <div className="hidden items-center gap-2 md:flex">
+                <MagneticButton strength={0.18}>
                 <Link
                   href="/auth/login"
                   className="inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"
@@ -179,14 +183,17 @@ export function Navbar() {
                   <LogIn className="size-4" />
                   Sign in
                 </Link>
+                </MagneticButton>
 
-                <Link
-                  href="/auth/register"
-                  className="inline-flex h-10 items-center gap-2 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-white dark:text-slate-950 dark:shadow-white/10 dark:hover:bg-cyan-200"
-                >
-                  <UserPlus className="size-4" />
-                  Join
-                </Link>
+                <MagneticButton strength={0.18}>
+                  <Link
+                    href="/auth/register"
+                    className="inline-flex h-10 items-center gap-2 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white shadow-lg shadow-slate-950/20 transition hover:-translate-y-0.5 hover:bg-cyan-600 dark:bg-white dark:text-slate-950 dark:shadow-white/10 dark:hover:bg-cyan-200"
+                  >
+                    <UserPlus className="size-4" />
+                    Join
+                  </Link>
+                </MagneticButton>
               </div>
             )}
 
@@ -314,6 +321,7 @@ export function Navbar() {
               <LogoutButton compact />
             ) : (
               <div className="grid grid-cols-2 gap-3">
+                <MagneticButton strength={0.18}>
                 <Link
                   href="/auth/login"
                   onClick={() => setMenuOpen(false)}
@@ -321,7 +329,9 @@ export function Navbar() {
                 >
                   Sign in
                 </Link>
+                </MagneticButton>
 
+                <MagneticButton strength={0.18}>
                 <Link
                   href="/auth/register"
                   onClick={() => setMenuOpen(false)}
@@ -329,6 +339,7 @@ export function Navbar() {
                 >
                   Join GearUp
                 </Link>
+                </MagneticButton>
               </div>
             )}
           </div>

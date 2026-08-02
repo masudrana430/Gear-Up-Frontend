@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 const signalLines = Array.from({ length: 26 }, (_, index) => index);
 
@@ -241,10 +242,17 @@ function RentalMomentum() {
           </p>
 
           <h3 className="mt-4 font-sans text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Every great adventure starts
-            <span className="block bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent">
-              with a simple plan.
-            </span>
+            <KineticText
+              as="span"
+              text="Every great adventure starts"
+              className="block [font-optical-sizing:auto]"
+            />
+
+            <KineticText
+              as="span"
+              text="with a simple plan."
+              className="block bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent [font-optical-sizing:auto]"
+            />
           </h3>
 
           <p className="mt-4 max-w-xl font-sans text-sm leading-7 text-slate-300 sm:text-base">
@@ -439,9 +447,11 @@ export function GearFlowSection() {
             BUILT FOR RELIABLE RENTALS
           </p>
 
-          <h2 className="mt-4 text-4xl font-black leading-tight tracking-tight sm:text-5xl">
-            A smooth rental journey from discovery to return.
-          </h2>
+          <KineticText
+            as="h2"
+            text="A smooth rental journey from discovery to return."
+            className="mt-4 block font-sans text-4xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-5xl"
+          />
 
           <p className="mt-5 text-lg leading-8 text-indigo-100/80">
             GearUp connects local providers, availability, secure payments, and

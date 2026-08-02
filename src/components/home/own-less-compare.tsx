@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, MousePointer2 } from "lucide-react";
 import { Compare } from "@/components/ui/compare";
 import { MagneticButton } from "../ui/magnetic-button";
+import { KineticText } from "../ui/kinetic-text";
 
 export function OwnLessCompare() {
   return (
@@ -23,11 +24,18 @@ export function OwnLessCompare() {
             MADE FOR REAL ADVENTURES
           </p>
 
-          <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-            Own less.
-            <span className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">
-              Explore more.
-            </span>
+          <h2 className="mt-4 text-8xl font-black tracking-tight sm:text-8xl">
+            <KineticText
+              as="span"
+              text="Own less."
+              className="block [font-optical-sizing:auto]"
+            />
+
+            <KineticText
+              as="span"
+              text="Explore more."
+              className="block bg-gradient-to-r from-cyan-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent [font-optical-sizing:auto]"
+            />
           </h2>
 
           <p className="mt-5 max-w-lg text-base leading-7 text-slate-600 dark:text-slate-300">
