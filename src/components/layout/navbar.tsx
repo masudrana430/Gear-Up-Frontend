@@ -8,9 +8,7 @@ import {
   LayoutDashboard,
   LogIn,
   Menu,
-  Moon,
   Mountain,
-  Sun,
   UserPlus,
   X,
   Sparkles,
@@ -21,7 +19,7 @@ import { useTheme } from "next-themes";
 import { useAuthStore } from "@/store/auth-store";
 import { dashboardForRole } from "@/lib/constants/routes";
 import { LogoutButton } from "@/components/auth/logout-button";
-import { MagneticButton } from "../ui/magnetic-button";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 
 type NavigationItem = {
   label: string;
@@ -30,52 +28,29 @@ type NavigationItem = {
 };
 
 function ThemeToggle({
-  isDark,
-  onToggle,
+  theme,
+  onThemeChange,
 }: {
-  isDark: boolean;
-  onToggle: () => void;
+  theme: "light" | "dark";
+  onThemeChange: (theme: "light" | "dark") => void;
 }) {
   return (
-    <MagneticButton strength={0.18}>
-      <button
-      type="button"
-      onClick={onToggle}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      aria-pressed={isDark}
-      className="group relative h-10 w-[72px] overflow-hidden rounded-full border border-slate-200/80 bg-white/70 shadow-sm backdrop-blur-xl transition hover:scale-[1.03] hover:shadow-md dark:border-white/10 dark:bg-slate-900/70"
-    >
-      <span className="absolute inset-0 bg-gradient-to-br from-white/80 via-cyan-50/40 to-violet-100/60 dark:from-white/10 dark:via-cyan-400/10 dark:to-violet-500/20" />
-
-      <Sun className="absolute left-2 top-1/2 size-4 -translate-y-1/2 text-amber-500 transition dark:text-amber-200/60" />
-      <Moon className="absolute right-2 top-1/2 size-4 -translate-y-1/2 text-indigo-500 transition dark:text-cyan-200" />
-
-      <span
-        className={`absolute top-1 grid size-8 place-items-center rounded-full border border-white/70 bg-white/90 shadow-[0_4px_14px_rgba(15,23,42,0.18)] transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] dark:border-white/20 dark:bg-slate-800 ${
-          isDark ? "translate-x-[34px] rotate-[360deg]" : "translate-x-1"
-        }`}
-      >
-        <span className="absolute inset-1 rounded-full bg-gradient-to-br from-white via-white/50 to-cyan-200/30 dark:from-white/20 dark:via-indigo-400/20 dark:to-cyan-300/20" />
-
-        {isDark ? (
-          <Moon className="relative z-10 size-4 text-cyan-200" />
-        ) : (
-          <Sun className="relative z-10 size-4 text-amber-500" />
-        )}
-      </span>
-    </button>
-    </MagneticButton>
-    
+    <AnimatedThemeToggler
+      theme={theme}
+      onThemeChange={onThemeChange}
+      variant="circle"
+      duration={650}
+    />
   );
 }
-
 export function Navbar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const { user, isAuthenticated } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const isDark = resolvedTheme === "dark";
+  const currentTheme: "light" | "dark" =
+    resolvedTheme === "dark" ? "dark" : "light";
 
   const navItems: NavigationItem[] = [
     {
@@ -186,8 +161,8 @@ export function Navbar() {
           <div className="flex items-center justify-end gap-2 sm:gap-3">
             <div className="hidden md:block">
               <ThemeToggle
-                isDark={isDark}
-                onToggle={() => setTheme(isDark ? "light" : "dark")}
+                theme={currentTheme}
+                onThemeChange={(nextTheme) => setTheme(nextTheme)}
               />
             </div>
 
@@ -217,8 +192,8 @@ export function Navbar() {
 
             <div className="md:hidden">
               <ThemeToggle
-                isDark={isDark}
-                onToggle={() => setTheme(isDark ? "light" : "dark")}
+                theme={currentTheme}
+                onThemeChange={(nextTheme) => setTheme(nextTheme)}
               />
             </div>
 
