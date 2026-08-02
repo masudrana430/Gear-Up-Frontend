@@ -13,6 +13,10 @@ import { GearFlowSection } from "@/components/home/gear-flow-section";
 import { CategoryShowcase } from "@/components/home/category-showcase";
 import Newsletter from "@/components/home/Newsletter";
 import { VideoHeroFooter } from "@/components/home/video-hero-footer";
+import { OwnLessCompare } from "@/components/home/own-less-compare";
+// import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+import { AnimatedTestimonialsDemo } from "@/components/home/AnimatedTestimonials";
+// import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
 const features = [
   {
@@ -78,6 +82,8 @@ export default function Home() {
       <CategoryShowcase />
       <Newsletter />
       <VideoHeroFooter />
+      <OwnLessCompare />
+      <AnimatedTestimonialsDemo/>
     </main>
   );
 }
