@@ -24,7 +24,7 @@ export function OwnLessCompare() {
             MADE FOR REAL ADVENTURES
           </p>
 
-          <h2 className="mt-4 text-6xl font-black tracking-tight sm:text-8xl">
+          <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-8xl">
             <KineticText
               as="span"
               text="Own less."

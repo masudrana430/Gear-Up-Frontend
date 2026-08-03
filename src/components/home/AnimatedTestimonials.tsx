@@ -59,7 +59,7 @@ export function AnimatedTestimonialsDemo() {
               LOCAL ADVENTURE STORIES
             </div>
 
-            <h2 className="mt-5 text-6xl font-black tracking-tight sm:text-8xl">
+            <h2 className="mt-5 text-4xl font-black tracking-tight sm:text-8xl">
               <KineticText
                 as="span"
                 text="Built for weekends"

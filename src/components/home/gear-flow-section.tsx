@@ -241,7 +241,7 @@ function RentalMomentum() {
             RENTAL, WITHOUT FRICTION
           </p>
 
-          <h3 className="mt-4 font-sans text-3xl font-black tracking-tight text-white sm:text-5xl">
+          <h3 className="mt-4 font-sans text-2xl font-black tracking-tight text-white sm:text-8xl">
             <KineticText
               as="span"
               text="Every great adventure starts"
@@ -449,8 +449,13 @@ export function GearFlowSection() {
 
           <KineticText
             as="h2"
-            text="A smooth rental journey from discovery to return."
-            className="mt-4 block font-sans text-4xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-5xl"
+            text="A smooth rental journey from"
+            className="mt-4 block font-sans text-2xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-6xl"
+          />
+          <KineticText
+            as="h2"
+            text="discovery to return."
+            className="mt-4 block font-sans text-2xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-6xl"
           />
 
           <p className="mt-5 text-lg leading-8 text-indigo-100/80">

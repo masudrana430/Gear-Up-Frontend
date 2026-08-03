@@ -39,7 +39,7 @@ export default function Newsletter() {
           THE GEARUP FIELD NOTES
         </p>
 
-        <h2 className="mt-4 text-6xl font-black tracking-tight text-slate-950 dark:text-white sm:text-8xl">
+        <h2 className="mt-4 text-xl font-black tracking-tight text-slate-950 dark:text-white sm:text-8xl">
           <KineticText
             as="span"
             text="Plan your next"
