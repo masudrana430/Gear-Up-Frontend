@@ -478,3 +478,140 @@
     animation: none;
     mix-blend-mode: normal;
 }
+
+
+.gearup-rental-stack {
+  transform: translateY(16px) scaleY(0.45);
+  transform-origin: bottom;
+  opacity: 0;
+  animation: gearup-rental-stack-rise 700ms
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gearup-rental-connector {
+  stroke-dasharray: 10 14;
+  animation: gearup-rental-connector-move 2.8s linear infinite;
+}
+
+@keyframes gearup-rental-stack-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes gearup-rental-connector-move {
+  to {
+    stroke-dashoffset: -96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-rental-stack,
+  .gearup-rental-connector {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+.gearup-rental-panel-enter {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+  animation: gearup-rental-panel-enter 850ms
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.gearup-rental-heading-enter {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: gearup-rental-content-enter 600ms
+    cubic-bezier(0.22, 1, 0.36, 1) 140ms forwards;
+}
+
+.gearup-rental-chart-enter {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  animation: gearup-rental-chart-enter 850ms
+    cubic-bezier(0.22, 1, 0.36, 1) 280ms forwards;
+}
+
+.gearup-rental-chart-enter::after {
+  position: absolute;
+  z-index: 1;
+  inset: -45%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    rgba(103, 232, 249, 0.2) 50%,
+    rgba(255, 255, 255, 0.45) 54%,
+    transparent 62%
+  );
+  transform: translateX(-75%) rotate(8deg);
+  animation: gearup-rental-sheen 1300ms ease-out 480ms both;
+}
+
+.gearup-rental-summary-enter {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: gearup-rental-content-enter 550ms
+    cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards;
+}
+
+.gearup-rental-connector {
+  stroke-dasharray: 10 14;
+  animation: gearup-rental-connector-move 2.8s linear 950ms infinite;
+}
+
+@keyframes gearup-rental-panel-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gearup-rental-content-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gearup-rental-chart-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gearup-rental-sheen {
+  from {
+    opacity: 0;
+    transform: translateX(-75%) rotate(8deg);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(75%) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gearup-rental-panel-enter,
+  .gearup-rental-heading-enter,
+  .gearup-rental-chart-enter,
+  .gearup-rental-summary-enter,
+  .gearup-rental-chart-enter::after,
+  .gearup-rental-connector {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}
