@@ -6,14 +6,11 @@ import {
   Activity,
   ArrowUpRight,
   CalendarDays,
-  CheckCircle2,
-  Clock,
   CreditCard,
   Package,
   RefreshCw,
   RotateCcw,
   Users,
-  XCircle,
 } from "lucide-react";
 
 import {
@@ -37,6 +34,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
+import { Cell, Pie, PieChart } from "recharts";
 
 export type RentalStatusSnapshot = {
   placed: number;
@@ -205,39 +204,41 @@ export function AdminDashboardOverview({
             ))}
           </div>
 
-          <div className="mt-6 grid gap-6 xl:grid-cols-12">
-            <RentalFlowCard
-              rentalStatus={rentalStatus}
-              hasActivity={recentRentalCount > 0}
-            />
+          <div className="space-y-4">
+            {/* First dashboard row */}
+            <div className="grid auto-rows-fr gap-4 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
+              <RentalFlowCard
+                rentalStatus={rentalStatus}
+                hasActivity={recentRentalCount > 0}
+              />
 
-            <PlatformHealthCard
-              users={users}
-              gear={gear}
-              activeRentals={activeRentals}
-              completionRate={completionRate}
-              rentalStatus={rentalStatus}
-              paymentStatus={paymentStatus}
-              isLoading={isLoading}
-            />
+              <PlatformHealthCard
+                users={users}
+                gear={gear}
+                activeRentals={activeRentals}
+                completionRate={completionRate}
+                rentalStatus={rentalStatus}
+                paymentStatus={paymentStatus}
+                isLoading={isLoading}
+              />
+            </div>
 
-            <RentalLifecycleCard
-              rentalStatus={rentalStatus}
-              hasActivity={recentRentalCount > 0}
-            />
+            {/* Second dashboard row: keep this exact three-card format */}
+            <div className="grid auto-rows-fr gap-4 md:grid-cols-2 xl:grid-cols-3">
+              <RentalLifecycleCard
+                rentalStatus={rentalStatus}
+                hasActivity={recentRentalCount > 0}
+              />
 
-            <PaymentDistributionCard
-              paymentStatus={paymentStatus}
-              completionRate={completionRate}
-              hasPayments={paymentCount > 0}
-            />
+              <PaymentDistributionCard paymentStatus={paymentStatus} />
 
-            <OperationsCard
-              rentals={rentals}
-              activeRentals={activeRentals}
-              cancelledRentals={rentalStatus.cancelled}
-              isLoading={isLoading}
-            />
+              <OperationsCard
+                rentals={rentals}
+                activeRentals={activeRentals}
+                cancelledRentals={rentalStatus.cancelled}
+                isLoading={isLoading}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -525,7 +526,7 @@ function RentalFlowCard({
   ];
 
   return (
-    <article className="gearup-admin-card gearup-rental-panel-enter overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] xl:col-span-7">
+    <article className="gearup-admin-card gearup-rental-panel-enter h-full min-w-0 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045]">
       <div className="gearup-rental-heading-enter flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-black text-slate-950 dark:text-white">
@@ -723,8 +724,7 @@ function PlatformHealthCard({
 
   const paymentHealthy = paymentStatus.completed;
   const paymentActive = paymentStatus.pending;
-  const paymentAttention =
-    paymentStatus.failed + paymentStatus.cancelled;
+  const paymentAttention = paymentStatus.failed + paymentStatus.cancelled;
 
   const healthData = [
     {
@@ -763,7 +763,7 @@ function PlatformHealthCard({
     0;
 
   return (
-    <article className="gearup-admin-card overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] xl:col-span-5">
+    <article className="gearup-admin-card h-full min-w-0 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-black text-slate-950 dark:text-white">
@@ -798,11 +798,7 @@ function PlatformHealthCard({
                 layout="vertical"
                 margin={{ top: 10, right: 8, bottom: 6, left: 0 }}
               >
-                <XAxis
-                  type="number"
-                  domain={[0, maximum]}
-                  hide
-                />
+                <XAxis type="number" domain={[0, maximum]} hide />
 
                 <YAxis
                   type="category"
@@ -997,7 +993,7 @@ function RentalLifecycleCard({
   const chartKey = chartData.map((item) => item.value).join("-");
 
   return (
-    <article className="gearup-admin-card overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] xl:col-span-4">
+    <article className="gearup-admin-card h-full min-w-0 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045]">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-black text-slate-950 dark:text-white">
@@ -1135,105 +1131,169 @@ function RentalLifecycleCard({
 }
 function PaymentDistributionCard({
   paymentStatus,
-  completionRate,
-  hasPayments,
 }: {
   paymentStatus: PaymentStatusSnapshot;
-  completionRate: number;
-  hasPayments: boolean;
 }) {
-  const total = Math.max(
-    paymentStatus.completed +
-      paymentStatus.pending +
-      paymentStatus.failed +
-      paymentStatus.cancelled,
-    1,
-  );
-
-  const completed = (paymentStatus.completed / total) * 100;
-  const pending = (paymentStatus.pending / total) * 100;
-  const failed = (paymentStatus.failed / total) * 100;
-
-  const completedEnd = completed;
-  const pendingEnd = completed + pending;
-  const failedEnd = completed + pending + failed;
-
-  const chartBackground = hasPayments
-    ? `conic-gradient(
-        #38bdf8 0% ${completedEnd}%,
-        #8b5cf6 ${completedEnd}% ${pendingEnd}%,
-        #fb7185 ${pendingEnd}% ${failedEnd}%,
-        #cbd5e1 ${failedEnd}% 100%
-      )`
-    : "conic-gradient(#e2e8f0 0% 100%)";
-
-  const items = [
+  const segments = [
     {
-      label: "Completed",
-      value: paymentStatus.completed,
-      color: "bg-sky-400",
-      icon: CheckCircle2,
+      name: "Completed",
+      value: Math.max(0, paymentStatus.completed),
+      color: "#18c9b0",
     },
     {
-      label: "Pending",
-      value: paymentStatus.pending,
-      color: "bg-violet-500",
-      icon: Clock,
+      name: "Pending",
+      value: Math.max(0, paymentStatus.pending),
+      color: "#6d8cff",
     },
     {
-      label: "Failed",
-      value: paymentStatus.failed + paymentStatus.cancelled,
-      color: "bg-rose-400",
-      icon: XCircle,
+      name: "Failed",
+      value: Math.max(0, paymentStatus.failed),
+      color: "#fb7185",
+    },
+    {
+      name: "Cancelled",
+      value: Math.max(0, paymentStatus.cancelled),
+      color: "#fbbf24",
     },
   ];
 
+  const totalPayments = segments.reduce((sum, item) => sum + item.value, 0);
+
+  const chartData =
+    totalPayments > 0
+      ? segments.filter((item) => item.value > 0)
+      : [
+          {
+            name: "No payment data",
+            value: 1,
+            color: "#dbe4f0",
+          },
+        ];
+
+  const completedPercent =
+    totalPayments > 0
+      ? Math.round((paymentStatus.completed / totalPayments) * 100)
+      : 0;
+
+  const chartKey = segments
+    .map((item) => `${item.name}-${item.value}`)
+    .join("-");
+
   return (
-    <article className="gearup-admin-card rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] xl:col-span-4">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-black text-slate-950 dark:text-white">
+    <section className="gearup-admin-card relative h-full min-h-[275px] min-w-0 overflow-hidden p-4 sm:p-5">
+      <div
+        aria-hidden="true"
+        className="absolute -right-12 -top-12 size-32 rounded-full bg-cyan-300/20 blur-3xl"
+      />
+
+      <div className="relative z-10 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-sm font-bold text-slate-950 dark:text-white">
             Payment distribution
           </p>
+
           <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-            Latest payment transactions.
+            Live payment outcome mix.
           </p>
         </div>
 
-        <CreditCard className="size-5 text-violet-600 dark:text-violet-300" />
+        <span className="shrink-0 rounded-md border border-violet-200 bg-violet-50 px-2 py-1 text-[10px] font-bold text-violet-700 dark:border-violet-400/20 dark:bg-violet-400/10 dark:text-violet-300">
+          Live
+        </span>
       </div>
 
-      <div className="mt-5 flex items-center gap-5">
-        <div
-          style={{ background: chartBackground }}
-          className="gearup-admin-donut relative grid size-32 shrink-0 place-items-center rounded-full shadow-[0_0_40px_rgba(56,189,248,0.2)]"
-        >
-          <div className="grid size-20 place-items-center rounded-full bg-white text-center dark:bg-[#0b1836]">
-            <p className="text-2xl font-black text-slate-950 dark:text-white">
-              {completionRate}%
+      <div className="relative z-10 mt-5 grid grid-cols-[108px_minmax(0,1fr)] items-center gap-3">
+        {/* Donut chart */}
+        <div className="relative h-[118px] min-w-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Tooltip
+                cursor={false}
+                formatter={(value) => [
+                  Number(value).toLocaleString(),
+                  "Payments",
+                ]}
+                contentStyle={{
+                  border: "1px solid rgba(148, 163, 184, 0.22)",
+                  borderRadius: "12px",
+                  background: "#0b1731",
+                  color: "#ffffff",
+                }}
+              />
+
+              <Pie
+                key={chartKey}
+                data={chartData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius="58%"
+                outerRadius="92%"
+                startAngle={90}
+                endAngle={-270}
+                paddingAngle={chartData.length > 1 ? 5 : 0}
+                cornerRadius="50%"
+                stroke="transparent"
+                isAnimationActive
+                animationBegin={150}
+                animationDuration={1300}
+                animationEasing="cubic-bezier(0.22, 1, 0.36, 1)"
+              >
+                {chartData.map((item) => (
+                  <Cell key={item.name} fill={item.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+            <p className="text-xl font-black text-slate-950 dark:text-white">
+              {completedPercent}%
             </p>
-            <p className="text-[10px] font-bold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              success
+
+            <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
+              Success
             </p>
           </div>
         </div>
 
-        <div className="min-w-0 flex-1 space-y-3">
-          {items.map(({ label, value, color, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-2">
-              <span className={`size-2.5 rounded-full ${color}`} />
-              <Icon className="size-3.5 text-slate-400 dark:text-slate-500" />
-              <span className="min-w-0 flex-1 truncate text-xs font-semibold text-slate-600 dark:text-slate-300">
-                {label}
+        {/* Status list */}
+        <div className="min-w-0 space-y-2.5">
+          {segments.map((segment) => (
+            <div
+              key={segment.name}
+              className="flex items-center justify-between gap-2 text-xs"
+            >
+              <span className="flex min-w-0 items-center gap-2 text-slate-600 dark:text-slate-300">
+                <span
+                  className="size-2 shrink-0 rounded-full shadow-[0_0_10px_currentColor]"
+                  style={{
+                    backgroundColor: segment.color,
+                    color: segment.color,
+                  }}
+                />
+
+                <span className="truncate">{segment.name}</span>
               </span>
-              <span className="text-xs font-black text-slate-900 dark:text-white">
-                {formatNumber(value)}
+
+              <span className="shrink-0 font-bold text-slate-950 dark:text-white">
+                {segment.value}
               </span>
             </div>
           ))}
         </div>
       </div>
-    </article>
+
+      <div className="relative z-10 mt-5 border-t border-slate-200 pt-3 dark:border-white/10">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          Total payments{" "}
+          <span className="ml-1 font-bold text-cyan-700 dark:text-cyan-300">
+            {totalPayments.toLocaleString()}
+          </span>
+        </p>
+      </div>
+    </section>
   );
 }
 
@@ -1269,7 +1329,7 @@ function OperationsCard({
   ];
 
   return (
-    <article className="gearup-admin-card rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045] xl:col-span-4">
+    <article className="gearup-admin-card h-full min-w-0 rounded-2xl border border-slate-200/80 bg-white/90 p-5 shadow-sm dark:border-white/10 dark:bg-white/[0.045]">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-sm font-black text-slate-950 dark:text-white">
