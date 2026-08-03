@@ -828,12 +828,19 @@ function PlatformHealthCard({
                     color: "#a5f3fc",
                     fontWeight: 800,
                   }}
-                  formatter={(value: number | [number, number]) => {
-                    const total = Array.isArray(value)
-                      ? value[1] - value[0]
-                      : value;
+                  formatter={(value) => {
+                    if (value == null) {
+                      return ["0", ""];
+                    }
 
-                    return [formatNumber(total), ""];
+                    const total = Array.isArray(value)
+                      ? Number(value[1] ?? 0) - Number(value[0] ?? 0)
+                      : Number(value);
+
+                    return [
+                      formatNumber(Number.isFinite(total) ? total : 0),
+                      "",
+                    ];
                   }}
                 />
 
