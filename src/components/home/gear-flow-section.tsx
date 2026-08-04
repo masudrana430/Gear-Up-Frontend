@@ -310,8 +310,8 @@ export function GearFlowSection() {
         className="absolute -right-48 bottom-32 -z-10 size-[460px] rounded-full bg-fuchsia-200/25 blur-3xl dark:bg-violet-500/10"
       />
 
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl">
           <p className="text-sm font-bold tracking-[0.2em] text-indigo-600 dark:text-cyan-300">
             BUILT FOR RELIABLE RENTALS
           </p>
