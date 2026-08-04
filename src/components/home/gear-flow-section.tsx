@@ -10,8 +10,6 @@ import type { LucideIcon } from "lucide-react";
 import { MagneticButton } from "../ui/magnetic-button";
 import { KineticText } from "../ui/kinetic-text";
 
-const signalLines = Array.from({ length: 26 }, (_, index) => index);
-
 type FlowNodeProps = {
   className: string;
   icon: LucideIcon;
@@ -22,16 +20,20 @@ type FlowNodeProps = {
 function FlowNode({ className, icon: Icon, title, subtitle }: FlowNodeProps) {
   return (
     <div
-      className={`gearup-flow-node absolute z-10 w-[142px] rounded-xl border border-cyan-200/15 bg-[#101d46]/90 p-3 shadow-[0_15px_35px_rgba(0,0,0,0.28)] backdrop-blur ${className}`}
+      className={`gearup-flow-node absolute z-10 w-[142px] rounded-2xl border border-slate-200/80 bg-white/90 p-3 shadow-[0_18px_45px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-colors dark:border-white/10 dark:bg-[#101d46]/90 dark:shadow-[0_18px_45px_rgba(0,0,0,0.32)] ${className}`}
     >
-      <div className="flex items-center gap-2">
-        <span className="grid size-7 place-items-center rounded-md bg-cyan-300/15 text-cyan-200">
+      <div className="flex items-center gap-2.5">
+        <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-indigo-50 text-indigo-600 ring-1 ring-indigo-100 dark:bg-cyan-300/10 dark:text-cyan-200 dark:ring-cyan-200/10">
           <Icon className="size-4" />
         </span>
 
-        <div>
-          <p className="text-xs font-semibold text-white">{title}</p>
-          <p className="text-[10px] text-indigo-200/75">{subtitle}</p>
+        <div className="min-w-0">
+          <p className="truncate text-xs font-semibold text-slate-950 dark:text-white">
+            {title}
+          </p>
+          <p className="truncate text-[10px] text-slate-500 dark:text-indigo-200/70">
+            {subtitle}
+          </p>
         </div>
       </div>
     </div>
@@ -42,14 +44,23 @@ function RentalNetwork() {
   return (
     <div
       aria-hidden="true"
-      className="relative hidden min-h-[520px] overflow-hidden rounded-2xl border border-indigo-300/15 bg-[#091433] md:block"
+      className="relative hidden min-h-[520px] overflow-hidden rounded-[28px] border border-slate-200/80 shadow-[0_24px_70px_rgba(15,23,42,0.10)] md:block dark:border-indigo-300/15 dark:shadow-[0_26px_80px_rgba(0,0,0,0.30)] [--center-ring:#818cf8] [--flow-path:#a5b4fc] [--network-bg:#f8fafc] [--network-dot:#6366f120] [--network-glow:#7c3aed1c] [--particle-a:#4f46e5] [--particle-b:#0ea5e9] [--particle-c:#8b5cf6] dark:[--center-ring:#8b7dff] dark:[--flow-path:#6366f1] dark:[--network-bg:#091433] dark:[--network-dot:#757eff33] dark:[--network-glow:#513dff3d] dark:[--particle-a:#6fffee] dark:[--particle-b:#60f7ea] dark:[--particle-c:#a78bfa]"
       style={{
+        backgroundColor: "var(--network-bg)",
         backgroundImage:
-          "radial-gradient(rgba(117, 126, 255, 0.2) 1px, transparent 1px)",
+          "radial-gradient(var(--network-dot) 1px, transparent 1px)",
         backgroundSize: "8px 8px",
       }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(81,61,255,0.24),transparent_36%)]" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 50%, var(--network-glow), transparent 38%)",
+        }}
+      />
+
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent dark:via-cyan-300/35" />
 
       <svg
         viewBox="0 0 1200 560"
@@ -66,18 +77,39 @@ function RentalNetwork() {
           </filter>
         </defs>
 
-        {/* Connection lines */}
-        <path className="gearup-flow-path" d="M 170 280 H 535" />
-        <path className="gearup-flow-path" d="M 355 108 V 225 H 535" />
-        <path className="gearup-flow-path" d="M 355 452 V 335 H 535" />
+        <path
+          className="gearup-flow-path"
+          d="M 170 280 H 535"
+          style={{ stroke: "var(--flow-path)" }}
+        />
+        <path
+          className="gearup-flow-path"
+          d="M 355 108 V 225 H 535"
+          style={{ stroke: "var(--flow-path)" }}
+        />
+        <path
+          className="gearup-flow-path"
+          d="M 355 452 V 335 H 535"
+          style={{ stroke: "var(--flow-path)" }}
+        />
+        <path
+          className="gearup-flow-path"
+          d="M 665 280 H 1030"
+          style={{ stroke: "var(--flow-path)" }}
+        />
+        <path
+          className="gearup-flow-path"
+          d="M 665 225 H 845 V 108"
+          style={{ stroke: "var(--flow-path)" }}
+        />
+        <path
+          className="gearup-flow-path"
+          d="M 665 335 H 845 V 452"
+          style={{ stroke: "var(--flow-path)" }}
+        />
 
-        <path className="gearup-flow-path" d="M 665 280 H 1030" />
-        <path className="gearup-flow-path" d="M 665 225 H 845 V 108" />
-        <path className="gearup-flow-path" d="M 665 335 H 845 V 452" />
-
-        {/* Moving dots */}
-        <g filter="url(#gearupParticleGlow)">
-          <circle r="5" fill="#6fffee">
+        <g filter="url(#gearupParticleGlow)" className="motion-reduce:hidden">
+          <circle r="5" fill="var(--particle-a)">
             <animateMotion
               dur="3.8s"
               repeatCount="indefinite"
@@ -85,7 +117,7 @@ function RentalNetwork() {
             />
           </circle>
 
-          <circle r="4" fill="#9f83ff">
+          <circle r="4" fill="var(--particle-c)">
             <animateMotion
               dur="3.3s"
               begin="-1.2s"
@@ -94,7 +126,7 @@ function RentalNetwork() {
             />
           </circle>
 
-          <circle r="4" fill="#60f7ea">
+          <circle r="4" fill="var(--particle-b)">
             <animateMotion
               dur="3.5s"
               begin="-2.2s"
@@ -103,7 +135,7 @@ function RentalNetwork() {
             />
           </circle>
 
-          <circle r="5" fill="#6fffee">
+          <circle r="5" fill="var(--particle-a)">
             <animateMotion
               dur="3.9s"
               begin="-0.7s"
@@ -112,7 +144,7 @@ function RentalNetwork() {
             />
           </circle>
 
-          <circle r="4" fill="#ad91ff">
+          <circle r="4" fill="var(--particle-c)">
             <animateMotion
               dur="3.4s"
               begin="-1.8s"
@@ -121,7 +153,7 @@ function RentalNetwork() {
             />
           </circle>
 
-          <circle r="4" fill="#60f7ea">
+          <circle r="4" fill="var(--particle-b)">
             <animateMotion
               dur="3.2s"
               begin="-2.7s"
@@ -130,6 +162,14 @@ function RentalNetwork() {
             />
           </circle>
         </g>
+
+        <circle
+          className="gearup-center-ring"
+          cx="600"
+          cy="280"
+          r="78"
+          style={{ stroke: "var(--center-ring)" }}
+        />
       </svg>
 
       <FlowNode
@@ -153,20 +193,15 @@ function RentalNetwork() {
         subtitle="Checkout"
       />
 
-      <circle className="gearup-center-ring" cx="600" cy="280" r="78" />
-
       <div className="gearup-flow-core absolute left-1/2 top-1/2 z-10 size-36 -translate-x-1/2 -translate-y-1/2 sm:size-40">
         <div className="gearup-core-float relative size-full">
-          {/* Dotted orbit */}
-          <div className="gearup-core-orbit absolute -inset-3 rounded-full border-2 border-dashed border-violet-300/80" />
+          <div className="gearup-core-orbit absolute -inset-3 rounded-full border-2 border-dashed border-indigo-300/80 dark:border-violet-300/80" />
 
-          {/* Main circle */}
-          <div className="relative grid size-full place-items-center rounded-full border border-cyan-200/25 bg-gradient-to-br from-[#684dff] to-[#25166f] shadow-[0_0_60px_rgba(91,75,255,0.7)]">
+          <div className="relative grid size-full place-items-center rounded-full border border-white/30 bg-gradient-to-br from-indigo-600 via-violet-600 to-fuchsia-500 shadow-[0_20px_55px_rgba(79,70,229,0.38)] dark:border-cyan-200/25 dark:from-[#684dff] dark:via-[#4d35cf] dark:to-[#25166f] dark:shadow-[0_0_60px_rgba(91,75,255,0.65)]">
             <div className="text-center">
               <p className="text-xl font-black tracking-tight text-white sm:text-2xl">
                 GearUp
               </p>
-
               <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.16em] text-indigo-100">
                 Rental flow
               </p>
@@ -199,8 +234,6 @@ function RentalNetwork() {
   );
 }
 
-const ribbonLines = Array.from({ length: 34 }, (_, index) => index);
-
 const momentumSteps = [
   {
     number: "01",
@@ -221,244 +254,80 @@ const momentumSteps = [
 
 function RentalMomentum() {
   return (
-    <section className="gearup-momentum relative mt-10 overflow-hidden rounded-[30px] border border-white/10">
+    <section className="relative overflow-hidden rounded-[30px] border border-slate-200/80 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.10)] dark:border-white/10 dark:bg-[#0b1736] dark:shadow-[0_26px_80px_rgba(0,0,0,0.30)]">
       <div
         aria-hidden="true"
-        className="gearup-momentum-grid absolute inset-0"
+        className="gearup-momentum-grid absolute inset-0 opacity-25 dark:opacity-100"
       />
       <div
         aria-hidden="true"
-        className="absolute -left-24 top-16 size-72 rounded-full bg-cyan-400/10 blur-3xl"
+        className="absolute -left-24 top-16 size-72 rounded-full bg-sky-300/20 blur-3xl dark:bg-cyan-400/10"
       />
       <div
         aria-hidden="true"
-        className="absolute -right-20 bottom-0 size-80 rounded-full bg-violet-500/20 blur-3xl"
+        className="absolute -right-20 bottom-0 size-80 rounded-full bg-violet-300/25 blur-3xl dark:bg-violet-500/20"
       />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/50 to-transparent dark:via-cyan-300/35" />
 
-      <div className="relative z-10 grid min-h-[540px] grid-rows-[auto_1fr_auto] p-6 sm:p-10 lg:p-12">
-        <div className="max-w-2xl">
-          <p className="font-sans text-xs font-bold tracking-[0.22em] text-cyan-200">
-            RENTAL, WITHOUT FRICTION
-          </p>
-
-          <h3 className="mt-4 font-sans text-2xl font-black tracking-tight text-white sm:text-8xl">
-            <KineticText
-              as="span"
-              text="Every great adventure starts"
-              className="block [font-optical-sizing:auto]"
-            />
-
-            <KineticText
-              as="span"
-              text="with a simple plan."
-              className="block bg-gradient-to-r from-cyan-300 via-violet-300 to-fuchsia-300 bg-clip-text text-transparent [font-optical-sizing:auto]"
-            />
-          </h3>
-
-          <p className="mt-4 max-w-xl font-sans text-sm leading-7 text-slate-300 sm:text-base">
-            GearUp connects local gear, secure booking, pickup, and return in
-            one clear rental journey.
-          </p>
-        </div>
-
-        <div className="relative hidden min-h-[250px] md:block">
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 1200 280"
-            preserveAspectRatio="none"
-            className="pointer-events-none absolute inset-0 size-full overflow-visible"
-          >
-            <defs>
-              <linearGradient
-                id="gearup-infinity-blue"
-                x1="0"
-                y1="0"
-                x2="1200"
-                y2="0"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0%" stopColor="#19e6df" stopOpacity="0.1" />
-                <stop offset="28%" stopColor="#45adff" />
-                <stop offset="54%" stopColor="#8e70ff" />
-                <stop offset="78%" stopColor="#df7cff" />
-                <stop offset="100%" stopColor="#22e9df" stopOpacity="0.1" />
-              </linearGradient>
-
-              <linearGradient
-                id="gearup-infinity-pink"
-                x1="0"
-                y1="0"
-                x2="1200"
-                y2="0"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0%" stopColor="#ffae9e" stopOpacity="0.1" />
-                <stop offset="26%" stopColor="#ff83c7" />
-                <stop offset="52%" stopColor="#a36cff" />
-                <stop offset="76%" stopColor="#4ec9ff" />
-                <stop offset="100%" stopColor="#24eee0" stopOpacity="0.1" />
-              </linearGradient>
-
-              <filter
-                id="gearup-infinity-glow"
-                x="-30%"
-                y="-100%"
-                width="160%"
-                height="300%"
-              >
-                <feGaussianBlur stdDeviation="6" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            {/* Permanent, soft infinity lines */}
-            <path
-              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
-              fill="none"
-              stroke="url(#gearup-infinity-blue)"
-              strokeLinecap="round"
-              strokeWidth="3"
-              strokeOpacity="0.32"
-            />
-
-            <path
-              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
-              fill="none"
-              stroke="url(#gearup-infinity-pink)"
-              strokeLinecap="round"
-              strokeWidth="3"
-              strokeOpacity="0.32"
-            />
-
-            {/* Blue moving glow */}
-            <path
-              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
-              fill="none"
-              filter="url(#gearup-infinity-glow)"
-              pathLength="100"
-              stroke="url(#gearup-infinity-blue)"
-              strokeDasharray="38 12"
-              strokeLinecap="round"
-              strokeWidth="8"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-50"
-                dur="2.7s"
-                repeatCount="indefinite"
-                calcMode="linear"
-              />
-            </path>
-
-            {/* Pink moving glow — opposite direction */}
-            <path
-              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
-              fill="none"
-              filter="url(#gearup-infinity-glow)"
-              pathLength="100"
-              stroke="url(#gearup-infinity-pink)"
-              strokeDasharray="38 12"
-              strokeLinecap="round"
-              strokeWidth="8"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="-50"
-                to="0"
-                dur="2.7s"
-                repeatCount="indefinite"
-                calcMode="linear"
-              />
-            </path>
-
-            {/* Sharp energy on top of the glow */}
-            <path
-              d="M -40 140 C 120 22, 310 22, 480 140 C 650 258, 830 258, 1000 140 C 1170 22, 1360 22, 1530 140"
-              fill="none"
-              pathLength="100"
-              stroke="url(#gearup-infinity-blue)"
-              strokeDasharray="38 12"
-              strokeLinecap="round"
-              strokeWidth="3"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-50"
-                dur="2.7s"
-                repeatCount="indefinite"
-                calcMode="linear"
-              />
-            </path>
-
-            <path
-              d="M -40 140 C 120 258, 310 258, 480 140 C 650 22, 830 22, 1000 140 C 1170 258, 1360 258, 1530 140"
-              fill="none"
-              pathLength="100"
-              stroke="url(#gearup-infinity-pink)"
-              strokeDasharray="38 12"
-              strokeLinecap="round"
-              strokeWidth="3"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="-50"
-                to="0"
-                dur="2.7s"
-                repeatCount="indefinite"
-                calcMode="linear"
-              />
-            </path>
-          </svg>
-        </div>
-
-        <div className="grid gap-3 border-t border-white/10 pt-5 sm:grid-cols-3">
-          {momentumSteps.map((step) => (
-            <article
-              key={step.number}
-              className="gearup-momentum-step rounded-2xl border border-white/10 bg-white/[0.035] p-4 backdrop-blur-sm"
-            >
-              <p className="font-sans text-xs font-bold tracking-[0.18em] text-cyan-300">
-                {step.number}
-              </p>
-              <h4 className="mt-3 font-sans text-lg font-bold text-white">
-                {step.title}
-              </h4>
-              <p className="mt-1 font-sans text-sm leading-6 text-slate-400">
-                {step.text}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
+     
     </section>
   );
 }
+
+const mobileFlowItems = [
+  "Provider gear → Availability",
+  "Availability → Secure payment",
+  "Secure payment → Pickup and return tracking",
+];
+
+const confidenceItems = [
+  {
+    title: "Simple",
+    text: "Booking in clear steps",
+    className: "text-indigo-600 dark:text-cyan-200",
+  },
+  {
+    title: "Live",
+    text: "Rental status updates",
+    className: "text-violet-600 dark:text-violet-300",
+  },
+  {
+    title: "Local",
+    text: "Trusted nearby providers",
+    className: "text-rose-500 dark:text-pink-300",
+  },
+];
+
 export function GearFlowSection() {
   return (
-    <section className="overflow-hidden bg-[#071334] py-20 text-white sm:py-28">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
+    <section className="relative isolate overflow-hidden bg-[#f5f7fb] py-20 text-slate-950 transition-colors sm:py-28 dark:bg-[#071334] dark:text-white">
+      <div
+        aria-hidden="true"
+        className="absolute -left-40 top-24 -z-10 size-[420px] rounded-full bg-indigo-200/35 blur-3xl dark:bg-indigo-500/10"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -right-48 bottom-32 -z-10 size-[460px] rounded-full bg-fuchsia-200/25 blur-3xl dark:bg-violet-500/10"
+      />
+
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-sm font-bold tracking-[0.2em] text-cyan-300">
+          <p className="text-sm font-bold tracking-[0.2em] text-indigo-600 dark:text-cyan-300">
             BUILT FOR RELIABLE RENTALS
           </p>
 
           <KineticText
             as="h2"
             text="A smooth rental journey from"
-            className="mt-4 block font-sans text-2xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-6xl"
+            className="mt-4 block font-sans text-3xl font-black leading-[1.05] tracking-[-0.04em] text-slate-950 [font-optical-sizing:auto] sm:text-5xl lg:text-6xl dark:text-white"
           />
           <KineticText
             as="h2"
             text="discovery to return."
-            className="mt-4 block font-sans text-2xl font-black leading-tight tracking-tight text-white [font-optical-sizing:auto] sm:text-6xl"
+            className="mt-1 block font-sans text-3xl font-black leading-[1.05] tracking-[-0.04em] text-slate-950 [font-optical-sizing:auto] sm:text-5xl lg:text-6xl dark:text-white"
           />
 
-          <p className="mt-5 text-lg leading-8 text-indigo-100/80">
+          <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg dark:text-indigo-100/75">
             GearUp connects local providers, availability, secure payments, and
             rental updates in one clear experience.
           </p>
@@ -467,7 +336,7 @@ export function GearFlowSection() {
             <MagneticButton strength={0.24}>
               <Link
                 href="/gear"
-                className="inline-flex h-11 items-center gap-2 rounded-lg bg-violet-500 px-5 text-sm font-semibold text-white transition hover:bg-violet-400"
+                className="inline-flex h-11 items-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(79,70,229,0.24)] transition hover:-translate-y-0.5 hover:bg-indigo-500 hover:shadow-[0_16px_36px_rgba(79,70,229,0.30)] dark:bg-violet-500 dark:hover:bg-violet-400"
               >
                 Browse gear <ArrowRight className="size-4" />
               </Link>
@@ -476,7 +345,7 @@ export function GearFlowSection() {
             <MagneticButton strength={0.18}>
               <Link
                 href="/auth/register"
-                className="inline-flex h-11 items-center rounded-lg border border-indigo-200/25 px-5 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex h-11 items-center rounded-xl border border-slate-300/80 bg-white/70 px-5 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:border-indigo-300 hover:bg-white dark:border-indigo-200/20 dark:bg-white/[0.035] dark:text-white dark:hover:border-indigo-200/30 dark:hover:bg-white/10"
               >
                 Become a provider
               </Link>
@@ -488,56 +357,56 @@ export function GearFlowSection() {
           <RentalNetwork />
 
           <div className="grid gap-3 md:hidden">
-            {[
-              "Provider gear → Availability",
-              "Availability → Secure payment",
-              "Secure payment → Pickup and return tracking",
-            ].map((item) => (
+            {mobileFlowItems.map((item, index) => (
               <div
                 key={item}
-                className="rounded-xl border border-indigo-200/15 bg-indigo-950/60 p-4 text-sm text-indigo-100"
+                className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white/85 p-4 text-sm font-medium text-slate-700 shadow-[0_10px_28px_rgba(15,23,42,0.08)] backdrop-blur dark:border-indigo-200/15 dark:bg-indigo-950/55 dark:text-indigo-100"
               >
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-indigo-50 text-xs font-bold text-indigo-600 dark:bg-cyan-300/10 dark:text-cyan-200">
+                  {index + 1}
+                </span>
                 {item}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="relative mt-8 overflow-hidden rounded-2xl border border-indigo-200/15 bg-[#0a173a] px-6 py-10 sm:px-10 sm:py-14">
+        <div className="mt-8">
           <RentalMomentum />
+        </div>
+
+        <div className="relative mt-8 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/85 px-6 py-10 shadow-[0_24px_70px_rgba(15,23,42,0.10)] backdrop-blur sm:px-10 sm:py-12 dark:border-indigo-200/15 dark:bg-[#0a173a]/90 dark:shadow-[0_26px_80px_rgba(0,0,0,0.28)]">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent dark:via-cyan-300/35" />
 
           <div className="relative z-10 max-w-2xl">
-            <h3 className="text-2xl font-bold sm:text-3xl">
+            <h3 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl dark:text-white">
               Plan adventures with confidence.
             </h3>
 
-            <p className="mt-3 text-base leading-7 text-indigo-100/75">
+            <p className="mt-3 text-base leading-7 text-slate-600 dark:text-indigo-100/75">
               Check availability, reserve with secure payment, and follow each
               rental status without confusion.
             </p>
           </div>
 
-          <div className="relative z-10 mt-16 grid gap-8 sm:grid-cols-3">
-            <div>
-              <p className="text-4xl font-black text-cyan-200">Simple</p>
-              <p className="mt-2 text-sm text-indigo-100/75">
-                Booking in clear steps
-              </p>
-            </div>
-
-            <div>
-              <p className="text-4xl font-black text-violet-300">Live</p>
-              <p className="mt-2 text-sm text-indigo-100/75">
-                Rental status updates
-              </p>
-            </div>
-
-            <div>
-              <p className="text-4xl font-black text-pink-300">Local</p>
-              <p className="mt-2 text-sm text-indigo-100/75">
-                Trusted nearby providers
-              </p>
-            </div>
+          <div className="relative z-10 mt-10 grid gap-4 sm:grid-cols-3 sm:gap-0">
+            {confidenceItems.map((item, index) => (
+              <div
+                key={item.title}
+                className={`rounded-2xl border border-slate-200/70 bg-slate-50/75 p-5 sm:rounded-none sm:border-y-0 sm:bg-transparent sm:px-7 sm:py-1 dark:border-white/10 dark:bg-white/[0.025] sm:dark:bg-transparent ${
+                  index > 0 ? "sm:border-l" : "sm:border-0"
+                }`}
+              >
+                <p
+                  className={`text-3xl font-black tracking-[-0.04em] sm:text-4xl ${item.className}`}
+                >
+                  {item.title}
+                </p>
+                <p className="mt-2 text-sm text-slate-600 dark:text-indigo-100/70">
+                  {item.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
